@@ -112,9 +112,9 @@
                     <div class="form-content form-content1 w-100 transparent p-0 shadow-none position-relative">
                         <div class="form-navtab text-center">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#return"><i class="fa fa-plane"></i> Return</a></li>
-                                <li><a data-toggle="tab" href="#oneway"><i class="fa fa-plane"></i> One Way</a></li>
-                                <li><a data-toggle="tab" href="#multicity"><i class="fa fa-plane"></i> Multi City</a></li>
+                                <li class="active"><a data-toggle="tab" href="#return"></i> Return</a></li>
+                                <li><a data-toggle="tab" href="#oneway"></i> One Way</a></li>
+                                <li><a data-toggle="tab" href="#multicity"></i> Multi City</a></li>
                             </ul>
                         </div>    
 
@@ -187,7 +187,7 @@
                                     </div>
                                     <div class="col-lg">
                                         <div class="form-group mb-0 mt-3">
-                                            <button type="submit" class="nir-btn w-100"><i class="fa fa-search mr-2"></i> Search Now</button>
+                                            <button id="searchNow" type="submit" class="nir-btn w-100"><i class="fa fa-search mr-2"></i> Search Now</button>
                                         </div>
                                     </div>
                                 </div>
@@ -935,6 +935,14 @@
             });
         }
     });
+
+    //http://127.0.0.1:5500/flight-list.html
+
+    //Set event on click of search id="searchNow" button
+    document.getElementById("searchNow").onclick = function() {
+        window.location.href = "flight-list.html";
+    };
+    
     </script>
 </body>
 </html>
