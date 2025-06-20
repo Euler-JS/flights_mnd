@@ -1302,9 +1302,9 @@
 
             // Simulate search delay
             setTimeout(() => {
-                alert('Redirecionando para a lista de voos...');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
+                window.location.href = 'flight-list.html'; // Redirect to flight results page
                 // Here you would typically redirect to flight results page
                 // window.location.href = 'flight-list.html';
             }, 2000);
