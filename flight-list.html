@@ -849,7 +849,7 @@
                                 </div>
                                 <div class="flight-price">
                                     <div class="price-amount">R$ 345</div>
-                                    <a href="#" class="book-btn">Reservar</a>
+                                    <a href="flight-booking.html" class="book-btn">Reservar</a>
                                 </div>
                             </div>
                         </div>
@@ -877,7 +877,7 @@
                                 </div>
                                 <div class="flight-price">
                                     <div class="price-amount">R$ 568</div>
-                                    <a href="#" class="book-btn">Reservar</a>
+                                    <a href="flight-booking.html" class="book-btn">Reservar</a>
                                 </div>
                             </div>
                         </div>
@@ -905,7 +905,7 @@
                                 </div>
                                 <div class="flight-price">
                                     <div class="price-amount">R$ 720</div>
-                                    <a href="#" class="book-btn">Reservar</a>
+                                    <a href="flight-booking.html" class="book-btn">Reservar</a>
                                 </div>
                             </div>
                         </div>
@@ -933,7 +933,7 @@
                                 </div>
                                 <div class="flight-price">
                                     <div class="price-amount">R$ 289</div>
-                                    <a href="#" class="book-btn">Reservar</a>
+                                    <a href="flight-booking.html" class="book-btn">Reservar</a>
                                 </div>
                             </div>
                         </div>
@@ -961,7 +961,7 @@
                                 </div>
                                 <div class="flight-price">
                                     <div class="price-amount">R$ 445</div>
-                                    <a href="#" class="book-btn">Reservar</a>
+                                    <a href="flight-booking.html" class="book-btn">Reservar</a>
                                 </div>
                             </div>
                         </div>
@@ -1234,7 +1234,7 @@
                 this.style.pointerEvents = 'none';
                 
                 setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-check"></i> Reservado!';
+                    this.innerHTML = '<i class="fas fa-check"></i> Finalizar...!';
                     this.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
                     
                     setTimeout(() => {
@@ -1242,6 +1242,8 @@
                         this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
                         this.style.pointerEvents = 'auto';
                     }, 2000);
+
+					window.location.href = 'flight-booking.html';
                 }, 1500);
             });
         });
