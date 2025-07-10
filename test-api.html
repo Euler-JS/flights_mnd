@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste FlightsMND API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-container.error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .result-container.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+
+        .json-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .airport-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .airport-item {
+            padding: 10px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .airport-item:last-child {
+            border-bottom: none;
+        }
+
+        .airport-code {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .flight-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+        }
+
+        .flight-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+        }
+
+        .status-indicator.success {
+            background: #28a745;
+        }
+
+        .status-indicator.error {
+            background: #dc3545;
+        }
+
+        .quick-tests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quick-test-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .quick-test-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 FlightsMND API - Página de Testes</h1>
+            <p>Servidor rodando em: <strong>http://localhost:3000</strong></p>
+        </div>
+
+        <!-- Status Indicator -->
+        <div id="statusIndicator" class="status-indicator"></div>
+
+        <!-- Quick Tests -->
+        <div class="test-section">
+            <h3>⚡ Testes Rápidos</h3>
+            <div class="quick-tests">
+                <button class="quick-test-btn" onclick="testAPIStatus()">
+                    🔍 Testar API
+                </button>
+                <button class="quick-test-btn" onclick="testSaoPauloAirports()">
+                    🛫 Aeroportos SP
+                </button>
+                <button class="quick-test-btn" onclick="testFlightGRUtoGIG()">
+                    ✈️ Voo GRU→GIG
+                </button>
+                <button class="quick-test-btn" onclick="testInternationalFlight()">
+                    🌎 Voo Internacional
+                </button>
+            </div>
+        </div>
+
+        <!-- Airport Search Test -->
+        <div class="test-section">
+            <h3>🛫 Teste - Busca de Aeroportos</h3>
+            <div class="form-group">
+                <label>Buscar por cidade ou aeroporto:</label>
+                <input type="text" id="airportKeyword" placeholder="Ex: São Paulo, Miami, Londres" value="São Paulo">
+            </div>
+            <button class="btn" onclick="searchAirports()">
+                🔍 Buscar Aeroportos
+            </button>
+            <div id="airportResults" class="result-container" style="display: none;"></div>
+        </div>
+
+        <!-- Flight Search Test -->
+        <div class="test-section">
+            <h3>✈️ Teste - Busca de Voos</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Origem (Código IATA):</label>
+                    <input type="text" id="origin" placeholder="Ex: GRU" value="GRU">
+                </div>
+                <div class="form-group">
+                    <label>Destino (Código IATA):</label>
+                    <input type="text" id="destination" placeholder="Ex: JFK" value="JFK">
+                </div>
+                <div class="form-group">
+                    <label>Data de Partida:</label>
+                    <input type="date" id="departureDate" value="2025-08-15">
+                </div>
+                <div class="form-group">
+                    <label>Data de Volta (opcional):</label>
+                    <input type="date" id="returnDate">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Adultos:</label>
+                    <select id="adults">
+                        <option value="1">1 Adulto</option>
+                        <option value="2">2 Adultos</option>
+                        <option value="3">3 Adultos</option>
+                        <option value="4">4 Adultos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Crianças:</label>
+                    <select id="children">
+                        <option value="0">0 Crianças</option>
+                        <option value="1">1 Criança</option>
+                        <option value="2">2 Crianças</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Classe:</label>
+                    <select id="travelClass">
+                        <option value="ECONOMY">Econômica</option>
+                        <option value="PREMIUM_ECONOMY">Econômica Premium</option>
+                        <option value="BUSINESS">Executiva</option>
+                        <option value="FIRST">Primeira Classe</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" onclick="searchFlights()">
+                ✈️ Buscar Voos
+            </button>
+            <div id="flightResults" class="result-container" style="display: none;"></div>
+        </div>
+
+        <!-- Raw API Test -->
+        <div class="test-section">
+            <h3>🔧 Teste Avançado - API Raw</h3>
+            <div class="form-group">
+                <label>Endpoint:</label>
+                <select id="endpoint">
+                    <option value="test">GET /api/test</option>
+                    <option value="locations">GET /api/locations/search</option>
+                    <option value="flights">POST /api/flights/search</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Parâmetros/Body (JSON):</label>
+                <textarea id="requestData" rows="6" placeholder='{"keyword": "São Paulo"}'></textarea>
+            </div>
+            <button class="btn" onclick="testRawAPI()">
+                🚀 Executar Teste
+            </button>
+            <div id="rawResults" class="result-container" style="display: none;"></div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Processando requisição...</p>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+
+        // Utility Functions
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function showStatus(message, type) {
+            const indicator = document.getElementById('statusIndicator');
+            indicator.textContent = message;
+            indicator.className = `status-indicator ${type}`;
+            indicator.style.display = 'block';
+            
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 3000);
+        }
+
+        function displayResult(containerId, data, isError = false) {
+            const container = document.getElementById(containerId);
+            container.style.display = 'block';
+            container.className = `result-container ${isError ? 'error' : 'success'}`;
+            
+            let content = `<strong>${isError ? 'Erro:' : 'Resultado:'}</strong><br>`;
+            
+            if (typeof data === 'object') {
+                content += `<div class="json-output">${JSON.stringify(data, null, 2)}</div>`;
+            } else {
+                content += data;
+            }
+            
+            container.innerHTML = content;
+        }
+
+        // Quick Tests
+        async function testAPIStatus() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/test`);
+                const data = await response.json();
+                showStatus('✅ API funcionando!', 'success');
+                displayResult('airportResults', data);
+            } catch (error) {
+                showStatus('❌ Erro na API', 'error');
+                displayResult('airportResults', error.message, true);
+            }
+            hideLoading();
+        }
+
+        async function testSaoPauloAirports() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/locations/search?keyword=São Paulo`);
+                const data = await response.json();
+                showStatus('✅ Aeroportos encontrados!', 'success');
+                displayResult('airportResults', data);
+            } catch (error) {
+                showStatus('❌ Erro na busca', 'error');
+                displayResult('airportResults', error.message, true);
+            }
+            hideLoading();
+        }
+
+        async function testFlightGRUtoGIG() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/flights/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        origin: 'GRU',
+                        destination: 'GIG',
+                        departureDate: '2025-08-15',
+                        adults: 1
+                    })
+                });
+                const data = await response.json();
+                showStatus('✅ Voos encontrados!', 'success');
+                displayResult('flightResults', data);
+            } catch (error) {
+                showStatus('❌ Erro na busca de voos', 'error');
+                displayResult('flightResults', error.message, true);
+            }
+            hideLoading();
+        }
+
+        async function testInternationalFlight() {
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/flights/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        origin: 'GRU',
+                        destination: 'MIA',
+                        departureDate: '2025-08-15',
+                        returnDate: '2025-08-22',
+                        adults: 2
+                    })
+                });
+                const data = await response.json();
+                showStatus('✅ Voos internacionais encontrados!', 'success');
+                displayResult('flightResults', data);
+            } catch (error) {
+                showStatus('❌ Erro na busca internacional', 'error');
+                displayResult('flightResults', error.message, true);
+            }
+            hideLoading();
+        }
+
+        // Main Test Functions
+        async function searchAirports() {
+            const keyword = document.getElementById('airportKeyword').value;
+            if (!keyword || keyword.length < 3) {
+                showStatus('❌ Digite pelo menos 3 caracteres', 'error');
+                return;
+            }
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/locations/search?keyword=${encodeURIComponent(keyword)}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    showStatus(`✅ ${data.data.length} aeroportos encontrados!`, 'success');
+                    displayAirports(data.data);
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                showStatus('❌ Erro na busca de aeroportos', 'error');
+                displayResult('airportResults', error.message, true);
+            }
+            hideLoading();
+        }
+
+        function displayAirports(airports) {
+            const container = document.getElementById('airportResults');
+            container.style.display = 'block';
+            container.className = 'result-container success';
+            
+            let content = `<strong>Aeroportos encontrados (${airports.length}):</strong>`;
+            content += '<div class="airport-list">';
+            
+            airports.forEach(airport => {
+                content += `
+                    <div class="airport-item">
+                        <div>
+                            <span class="airport-code">${airport.iataCode}</span> - 
+                            <strong>${airport.name}</strong><br>
+                            <small>${airport.city}, ${airport.country}</small>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            content += '</div>';
+            container.innerHTML = content;
+        }
+
+        async function searchFlights() {
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+            const departureDate = document.getElementById('departureDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+            const adults = parseInt(document.getElementById('adults').value);
+            const children = parseInt(document.getElementById('children').value);
+            const travelClass = document.getElementById('travelClass').value;
+
+            if (!origin || !destination || !departureDate) {
+                showStatus('❌ Preencha origem, destino e data', 'error');
+                return;
+            }
+
+            const searchData = {
+                origin: origin.toUpperCase(),
+                destination: destination.toUpperCase(),
+                departureDate,
+                adults,
+                children,
+                travelClass
+            };
+
+            if (returnDate) {
+                searchData.returnDate = returnDate;
+            }
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/flights/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(searchData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showStatus(`✅ ${data.meta.count} voos encontrados!`, 'success');
+                    displayFlights(data.data);
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                showStatus('❌ Erro na busca de voos', 'error');
+                displayResult('flightResults', error.message, true);
+            }
+            hideLoading();
+        }
+
+        function displayFlights(flights) {
+            const container = document.getElementById('flightResults');
+            container.style.display = 'block';
+            container.className = 'result-container success';
+            
+            let content = `<strong>Voos encontrados (${flights.length}):</strong><br><br>`;
+            
+            flights.slice(0, 5).forEach((flight, index) => {
+                content += `
+                    <div class="flight-card">
+                        <div class="flight-header">
+                            <div>
+                                <strong>${flight.outbound.carrierCode} ${flight.outbound.flightNumber}</strong><br>
+                                <small>${flight.outbound.departure.iataCode} → ${flight.outbound.arrival.iataCode}</small>
+                            </div>
+                            <div class="price">R$ ${flight.price.total.toFixed(2)}</div>
+                        </div>
+                        <div>
+                            <strong>Partida:</strong> ${new Date(flight.outbound.departure.at).toLocaleString('pt-BR')}<br>
+                            <strong>Chegada:</strong> ${new Date(flight.outbound.arrival.at).toLocaleString('pt-BR')}<br>
+                            <strong>Duração:</strong> ${flight.outbound.duration}<br>
+                            <strong>Paradas:</strong> ${flight.outbound.stops === 0 ? 'Direto' : `${flight.outbound.stops} parada(s)`}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (flights.length > 5) {
+                content += `<p><em>... e mais ${flights.length - 5} voos disponíveis</em></p>`;
+            }
+            
+            container.innerHTML = content;
+        }
+
+        async function testRawAPI() {
+            const endpoint = document.getElementById('endpoint').value;
+            const requestData = document.getElementById('requestData').value;
+
+            let url, method = 'GET', body = null;
+
+            switch (endpoint) {
+                case 'test':
+                    url = `${API_BASE}/test`;
+                    break;
+                case 'locations':
+                    url = `${API_BASE}/locations/search?keyword=São Paulo`;
+                    if (requestData) {
+                        try {
+                            const params = JSON.parse(requestData);
+                            if (params.keyword) {
+                                url = `${API_BASE}/locations/search?keyword=${encodeURIComponent(params.keyword)}`;
+                            }
+                        } catch (e) {}
+                    }
+                    break;
+                case 'flights':
+                    url = `${API_BASE}/flights/search`;
+                    method = 'POST';
+                    body = requestData || JSON.stringify({
+                        origin: 'GRU',
+                        destination: 'JFK',
+                        departureDate: '2025-08-15',
+                        adults: 1
+                    });
+                    break;
+            }
+
+            showLoading();
+            try {
+                const options = {
+                    method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+                
+                if (body) {
+                    options.body = body;
+                }
+
+                const response = await fetch(url, options);
+                const data = await response.json();
+                
+                showStatus('✅ Requisição executada!', 'success');
+                displayResult('rawResults', data);
+            } catch (error) {
+                showStatus('❌ Erro na requisição', 'error');
+                displayResult('rawResults', error.message, true);
+            }
+            hideLoading();
+        }
+
+        // Set default date to tomorrow
+        document.getElementById('departureDate').valueAsDate = new Date(Date.now() + 24*60*60*1000);
+    </script>
+</body>
+</html>

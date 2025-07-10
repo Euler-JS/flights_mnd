@@ -171,392 +171,6 @@
             gap: 40px;
         }
 
-        /* Form Cards */
-        .form-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .form-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .form-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .form-card:hover::before {
-            opacity: 1;
-        }
-
-        .form-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .form-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transform: translate(30px, -30px);
-        }
-
-        .form-header h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .form-header i {
-            font-size: 1.2rem;
-        }
-
-        .form-content {
-            padding: 30px;
-        }
-
-        /* Form Groups */
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-wrapper i {
-            position: absolute;
-            left: 15px;
-            color: #667eea;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            background: white;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .form-input:focus + i, .form-select:focus + i {
-            color: #764ba2;
-            transform: scale(1.1);
-        }
-
-        /* Checkbox Styles */
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 12px;
-            border: 2px solid rgba(102, 126, 234, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .checkbox-group:hover {
-            border-color: rgba(102, 126, 234, 0.2);
-            background: rgba(102, 126, 234, 0.08);
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: #667eea;
-            margin-top: 2px;
-        }
-
-        .checkbox-group label {
-            margin: 0;
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .checkbox-group a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .checkbox-group a:hover {
-            color: #764ba2;
-        }
-
-        /* Submit Button */
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 20px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(-1px);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: sticky;
-            top: 90px;
-            height: fit-content;
-        }
-
-        .sidebar-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
-            margin-bottom: 25px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        /* Flight Info Card */
-        .flight-info-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .flight-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .flight-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .flight-image:hover img {
-            transform: scale(1.05);
-        }
-
-        .flight-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.6) 100%);
-        }
-
-        .favorite-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 50%;
-            color: #667eea;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .favorite-btn:hover {
-            background: white;
-            transform: scale(1.1);
-            color: #e74c3c;
-        }
-
-        .flight-details {
-            padding: 20px;
-        }
-
-        .airline-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .flight-route {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        /* Booking Details */
-        .detail-section {
-            border-bottom: 1px solid #f0f0f0;
-            padding: 20px;
-        }
-
-        .detail-section:last-child {
-            border-bottom: none;
-        }
-
-        .detail-section h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-
-        .detail-label {
-            font-weight: 500;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .detail-value {
-            font-weight: 600;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .edit-link {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .edit-link:hover {
-            color: #764ba2;
-        }
-
-        /* Payment Table */
-        .payment-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .payment-table td, .payment-table th {
-            padding: 12px 20px;
-            text-align: left;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .payment-table td:first-child {
-            font-weight: 500;
-            color: #666;
-        }
-
-        .payment-table td:last-child {
-            font-weight: 600;
-            color: #667eea;
-            text-align: right;
-        }
-
-        .payment-table .total-row {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .payment-table .total-row td {
-            border-bottom: none;
-            font-weight: 700;
-            font-size: 16px;
-        }
-
         /* Progress Indicator */
         .progress-indicator {
             display: flex;
@@ -635,6 +249,657 @@
             font-weight: 600;
         }
 
+        /* Flight Summary Card */
+        .flight-summary-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .flight-summary-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flight-summary-content {
+            padding: 25px;
+        }
+
+        .flight-route {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .flight-point {
+            text-align: center;
+        }
+
+        .flight-time {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .flight-airport {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 3px;
+        }
+
+        .flight-date {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .flight-path {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flight-duration {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .flight-line {
+            width: 60px;
+            height: 2px;
+            background: #e9ecef;
+            position: relative;
+            margin: 5px 0;
+        }
+
+        .flight-line::after {
+            content: '✈';
+            position: absolute;
+            top: -8px;
+            right: -5px;
+            color: #667eea;
+            font-size: 12px;
+        }
+
+        .flight-stops {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Form Cards */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .form-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .form-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-content {
+            padding: 30px;
+        }
+
+        /* Form Groups */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .required::after {
+            content: '*';
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            color: #667eea;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input:focus + i, .form-select:focus + i {
+            color: #764ba2;
+            transform: scale(1.1);
+        }
+
+        .form-input.error, .form-select.error {
+            border-color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-input.error + .error-message,
+        .form-select.error + .error-message {
+            display: block;
+        }
+
+        /* Passenger Cards */
+        .passenger-card {
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .passenger-card:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.02);
+        }
+
+        .passenger-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .passenger-number {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .passenger-type {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Checkbox Styles */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group:hover {
+            border-color: rgba(102, 126, 234, 0.2);
+            background: rgba(102, 126, 234, 0.08);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #667eea;
+            margin-top: 2px;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .checkbox-group a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .checkbox-group a:hover {
+            color: #764ba2;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Flight Info Card */
+        .flight-info-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flight-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flight-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .flight-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .flight-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.6) 100%);
+        }
+
+        .airline-logo {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .flight-details {
+            padding: 20px;
+        }
+
+        .airline-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .flight-route-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        /* Booking Details */
+        .detail-section {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 20px;
+        }
+
+        .detail-section:last-child {
+            border-bottom: none;
+        }
+
+        .detail-section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* Payment Summary */
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .payment-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .payment-table td:first-child {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .payment-table td:last-child {
+            font-weight: 600;
+            color: #333;
+            text-align: right;
+        }
+
+        .payment-table .total-row {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .payment-table .total-row td {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 15px;
+        }
+
+        /* Security Badge */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid rgba(76, 175, 80, 0.2);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .security-badge i {
+            color: #4CAF50;
+            font-size: 20px;
+        }
+
+        .security-text {
+            color: #2E7D32;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .loading-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            max-width: 400px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .notification.info {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .notification.warning {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 1024px) {
             .content-wrapper {
@@ -683,6 +948,15 @@
             .progress-step::after {
                 display: none;
             }
+
+            .flight-route {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .flight-path {
+                transform: rotate(90deg);
+            }
         }
 
         /* Animation Classes */
@@ -716,49 +990,20 @@
             }
         }
 
-        /* Loading States */
-        .loading {
-            position: relative;
-            overflow: hidden;
+        .pulse {
+            animation: pulse 2s infinite;
         }
 
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Security Badge */
-        .security-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px;
-            background: rgba(76, 175, 80, 0.1);
-            border: 2px solid rgba(76, 175, 80, 0.2);
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-
-        .security-badge i {
-            color: #4CAF50;
-            font-size: 20px;
-        }
-
-        .security-text {
-            color: #2E7D32;
-            font-weight: 500;
-            font-size: 14px;
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -783,9 +1028,11 @@
     <!-- Breadcrumb -->
     <section class="breadcrumb-section">
         <div class="breadcrumb-content">
-            <h2>Reserva de Voo</h2>
+            <h2 id="breadcrumb-title">Reserva de Voo</h2>
             <nav class="breadcrumb-nav">
-                <a href="index.html">Início</a> / <span>Reserva de Voo</span>
+                <a href="index.html">Início</a> / 
+                <a href="flight-results.html">Resultados</a> / 
+                <span>Reserva</span>
             </nav>
         </div>
     </section>
@@ -821,112 +1068,80 @@
                 </div>
             </div>
 
+            <!-- Flight Summary -->
+            <div class="flight-summary-card slide-up">
+                <div class="flight-summary-header">
+                    <h3>
+                        <i class="fas fa-plane"></i>
+                        Resumo do Voo
+                    </h3>
+                    <div id="flight-number">Carregando...</div>
+                </div>
+                <div class="flight-summary-content">
+                    <div class="flight-route">
+                        <div class="flight-point">
+                            <div class="flight-time" id="departure-time">--:--</div>
+                            <div class="flight-airport" id="departure-airport">---</div>
+                            <div class="flight-date" id="departure-date">-- --- ----</div>
+                        </div>
+                        <div class="flight-path">
+                            <div class="flight-duration" id="flight-duration">--h --m</div>
+                            <div class="flight-line"></div>
+                            <div class="flight-stops" id="flight-stops">Carregando...</div>
+                        </div>
+                        <div class="flight-point">
+                            <div class="flight-time" id="arrival-time">--:--</div>
+                            <div class="flight-airport" id="arrival-airport">---</div>
+                            <div class="flight-date" id="arrival-date">-- --- ----</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="content-wrapper">
                 <!-- Main Content Area -->
                 <div class="main-area">
-                    <!-- Personal Information Form -->
+                    <!-- Passengers Forms -->
                     <div class="form-card slide-up">
                         <div class="form-header">
                             <h3>
-                                <i class="fas fa-user"></i>
-                                Suas Informações Pessoais
+                                <i class="fas fa-users"></i>
+                                Informações dos Passageiros
                             </h3>
                         </div>
                         <div class="form-content">
-                            <form id="personalForm">
+                            <div id="passengers-container">
+                                <!-- Passenger forms will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-card slide-up">
+                        <div class="form-header">
+                            <h3>
+                                <i class="fas fa-envelope"></i>
+                                Informações de Contato
+                            </h3>
+                        </div>
+                        <div class="form-content">
+                            <form id="contactForm">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label>Nome Completo</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-user"></i>
-                                            <input type="text" class="form-input" placeholder="Digite seu nome completo" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
+                                        <label class="required">Email Principal</label>
                                         <div class="input-wrapper">
                                             <i class="fas fa-envelope"></i>
-                                            <input type="email" class="form-input" placeholder="seu@email.com" required>
+                                            <input type="email" class="form-input" name="email" placeholder="seu@email.com" required>
                                         </div>
+                                        <div class="error-message">Email é obrigatório</div>
                                     </div>
-                                </div>
-
-                                <div class="form-row">
                                     <div class="form-group">
-                                        <label>Telefone</label>
+                                        <label class="required">Telefone</label>
                                         <div class="input-wrapper">
                                             <i class="fas fa-phone"></i>
-                                            <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+                                            <input type="tel" class="form-input" name="phone" placeholder="(11) 99999-9999" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Data de Nascimento</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-calendar"></i>
-                                            <input type="date" class="form-input" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Data de Partida</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-plane-departure"></i>
-                                            <input type="date" class="form-input" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Data de Retorno</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-plane-arrival"></i>
-                                            <input type="date" class="form-input">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Número de Passageiros</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-users"></i>
-                                            <select class="form-select" required>
-                                                <option value="1">1 Passageiro</option>
-                                                <option value="2">2 Passageiros</option>
-                                                <option value="3">3 Passageiros</option>
-                                                <option value="4">4 Passageiros</option>
-                                                <option value="5">5+ Passageiros</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Gênero</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-venus-mars"></i>
-                                            <select class="form-select" required>
-                                                <option value="">Selecione</option>
-                                                <option value="masculino">Masculino</option>
-                                                <option value="feminino">Feminino</option>
-                                                <option value="outro">Outro</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Nacionalidade</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-flag"></i>
-                                            <select class="form-select" required>
-                                                <option value="">Selecione sua nacionalidade</option>
-                                                <option value="brasileira">Brasileira</option>
-                                                <option value="americana">Americana</option>
-                                                <option value="argentina">Argentina</option>
-                                                <option value="portuguesa">Portuguesa</option>
-                                                <option value="outras">Outras</option>
-                                            </select>
-                                        </div>
+                                        <div class="error-message">Telefone é obrigatório</div>
                                     </div>
                                 </div>
 
@@ -934,22 +1149,28 @@
                                     <label>Observações Especiais</label>
                                     <div class="input-wrapper">
                                         <i class="fas fa-comment"></i>
-                                        <textarea class="form-textarea" placeholder="Digite aqui qualquer solicitação especial ou observação..."></textarea>
+                                        <textarea class="form-textarea" name="remarks" placeholder="Alguma solicitação especial? (Refeições, assento, etc.)"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="newsletter" required>
+                                    <input type="checkbox" id="terms" required>
+                                    <label for="terms">
+                                        Concordo com os <a href="#" onclick="showTerms()">termos e condições</a> de uso da FlightsMND.
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="newsletter">
                                     <label for="newsletter">
-                                        Aceito receber ofertas promocionais da <strong>FlightsMND</strong> e concordo com os 
-                                        <a href="#">termos e condições</a> de uso.
+                                        Desejo receber ofertas e promoções por email.
                                     </label>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <!-- Payment Information Form -->
+                    <!-- Payment Information -->
                     <div class="form-card slide-up">
                         <div class="form-header">
                             <h3>
@@ -962,77 +1183,83 @@
                             <div class="security-badge">
                                 <i class="fas fa-shield-alt"></i>
                                 <div class="security-text">
-                                    Suas informações de pagamento estão protegidas com criptografia SSL de 256 bits
+                                    Transação segura com criptografia SSL de 256 bits
                                 </div>
                             </div>
 
                             <form id="paymentForm">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label>Nome no Cartão</label>
+                                        <label class="required">Número do Cartão</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-credit-card"></i>
+                                            <input type="text" class="form-input" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                        </div>
+                                        <div class="error-message">Número do cartão é obrigatório</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required">Nome no Cartão</label>
                                         <div class="input-wrapper">
                                             <i class="fas fa-user"></i>
-                                            <input type="text" class="form-input" placeholder="Nome conforme impresso no cartão" required>
+                                            <input type="text" class="form-input" name="cardName" placeholder="Nome conforme no cartão" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Número do Cartão</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-credit-card"></i>
-                                            <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                                        </div>
+                                        <div class="error-message">Nome no cartão é obrigatório</div>
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label>Data de Validade</label>
+                                        <label class="required">Validade</label>
                                         <div class="input-wrapper">
                                             <i class="fas fa-calendar"></i>
-                                            <input type="text" class="form-input" placeholder="MM/AA" maxlength="5" required>
+                                            <input type="text" class="form-input" name="cardExpiry" placeholder="MM/AA" maxlength="5" required>
                                         </div>
+                                        <div class="error-message">Data de validade é obrigatória</div>
                                     </div>
                                     <div class="form-group">
-                                        <label>CVV</label>
+                                        <label class="required">CVV</label>
                                         <div class="input-wrapper">
                                             <i class="fas fa-lock"></i>
-                                            <input type="text" class="form-input" placeholder="123" maxlength="4" required>
+                                            <input type="text" class="form-input" name="cardCVV" placeholder="123" maxlength="4" required>
                                         </div>
+                                        <div class="error-message">CVV é obrigatório</div>
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label>ID da Reserva</label>
-                                        <div class="input-wrapper">
-                                            <i class="fas fa-ticket-alt"></i>
-                                            <input type="text" class="form-input" placeholder="YTR-2025-001234" readonly value="YTR-2025-001234">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Bandeira do Cartão</label>
+                                        <label class="required">Bandeira</label>
                                         <div class="input-wrapper">
                                             <i class="fas fa-credit-card"></i>
-                                            <select class="form-select" required>
+                                            <select class="form-select" name="cardBrand" required>
                                                 <option value="">Selecione a bandeira</option>
                                                 <option value="visa">Visa</option>
                                                 <option value="mastercard">Mastercard</option>
-                                                <option value="amex">American Express</option>
+                                                <option value="american-express">American Express</option>
                                                 <option value="elo">Elo</option>
+                                                <option value="diners">Diners Club</option>
                                             </select>
+                                        </div>
+                                        <div class="error-message">Bandeira é obrigatória</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Código de Reserva</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <input type="text" class="form-input" name="bookingCode" id="booking-code" readonly>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="terms" required>
-                                    <label for="terms">
-                                        Concordo com os <a href="#">termos e condições</a> e autorizo o processamento do pagamento.
+                                    <input type="checkbox" id="payment-terms" required>
+                                    <label for="payment-terms">
+                                        Autorizo o processamento do pagamento e concordo com as <a href="#" onclick="showPaymentTerms()">condições de pagamento</a>.
                                     </label>
                                 </div>
 
-                                <button type="submit" class="submit-btn">
-                                    <i class="fas fa-lock"></i> Confirmar Reserva
+                                <button type="submit" class="submit-btn" id="submit-booking">
+                                    <i class="fas fa-lock"></i> Finalizar Reserva
                                 </button>
                             </form>
                         </div>
@@ -1044,14 +1271,14 @@
                     <!-- Flight Info -->
                     <div class="sidebar-card flight-info-card">
                         <div class="flight-image">
-                            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=200&fit=crop" alt="Singapore Airlines">
-                            <button class="favorite-btn">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                            <img id="airline-image" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=200&fit=crop" alt="Airline">
+                            <div class="airline-logo" id="airline-logo">
+                                --
+                            </div>
                         </div>
                         <div class="flight-details">
-                            <h4 class="airline-name">Singapore Airlines</h4>
-                            <p class="flight-route">São Paulo → Singapura</p>
+                            <h4 class="airline-name" id="airline-name">Carregando...</h4>
+                            <p class="flight-route-text" id="flight-route-text">Carregando rota...</p>
                         </div>
                     </div>
 
@@ -1063,30 +1290,32 @@
                                 Detalhes da Reserva
                             </h3>
                             <div class="detail-item">
-                                <div class="detail-label">
-                                    Data de Partida<br>
-                                    <small>22/02/2025, 14:30</small><br>
-                                    <small>Retorno: 28/02/2025, 09:15</small>
-                                </div>
-                                <div class="detail-value">
-                                    <a href="#" class="edit-link">Editar</a>
-                                </div>
+                                <div class="detail-label">Data de Partida</div>
+                                <div class="detail-value" id="booking-departure-date">--/--/----</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Horário de Partida</div>
+                                <div class="detail-value" id="booking-departure-time">--:--</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">Classe do Voo</div>
-                                <div class="detail-value">Econômica</div>
+                                <div class="detail-value" id="booking-class">Econômica</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">Origem</div>
-                                <div class="detail-value">São Paulo (GRU)</div>
+                                <div class="detail-value" id="booking-origin">---</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">Destino</div>
-                                <div class="detail-value">Singapura (SIN)</div>
+                                <div class="detail-value" id="booking-destination">---</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-label">Duração Estimada</div>
-                                <div class="detail-value">18h 45min</div>
+                                <div class="detail-label">Duração</div>
+                                <div class="detail-value" id="booking-duration">--h --m</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Passageiros</div>
+                                <div class="detail-value" id="booking-passengers">0</div>
                             </div>
                         </div>
                     </div>
@@ -1101,34 +1330,26 @@
                             <table class="payment-table">
                                 <tbody>
                                     <tr>
-                                        <td>Preço do Voo</td>
-                                        <td>R$ 2.580,00</td>
+                                        <td>Tarifa Base</td>
+                                        <td id="base-fare">R$ 0,00</td>
                                     </tr>
                                     <tr>
-                                        <td>Número de Passageiros</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Taxas Aeroportuárias</td>
-                                        <td>R$ 150,00</td>
+                                        <td>Taxas e Impostos</td>
+                                        <td id="taxes-fees">R$ 0,00</td>
                                     </tr>
                                     <tr>
                                         <td>Taxa de Serviço</td>
-                                        <td>R$ 45,00</td>
+                                        <td id="service-fee">R$ 45,00</td>
                                     </tr>
                                     <tr>
                                         <td>Subtotal</td>
-                                        <td>R$ 2.775,00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Desconto</td>
-                                        <td>-R$ 75,00</td>
+                                        <td id="subtotal">R$ 0,00</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr class="total-row">
-                                        <td>Total Final</td>
-                                        <td>R$ 2.700,00</td>
+                                        <td><strong>Total Final</strong></td>
+                                        <td id="total-amount"><strong>R$ 0,00</strong></td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -1139,123 +1360,798 @@
         </div>
     </main>
 
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text" id="loading-text">Processando...</div>
+            <div class="loading-description" id="loading-description">Por favor, aguarde...</div>
+        </div>
+    </div>
+
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
+        // ====================================
+        // CONFIGURAÇÃO INICIAL
+        // ====================================
+
+        const API_BASE = 'http://localhost:3000/api';
+        let selectedFlightData = null;
+        let searchParams = null;
+        let confirmedPricing = null;
+        let bookingCode = null;
+
+        // Inicializar página
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+        });
+
+        // ====================================
+        // INICIALIZAÇÃO DA PÁGINA
+        // ====================================
+
+        function initializePage() {
+            loadFlightData();
+            generateBookingCode();
+            setupEventListeners();
+            setupFormValidation();
+        }
+
+        // ====================================
+        // CARREGAMENTO DE DADOS
+        // ====================================
+
+        function loadFlightData() {
+            // Carregar dados do voo selecionado
+            const flightData = sessionStorage.getItem('selectedFlight');
+            const searchData = sessionStorage.getItem('searchParams');
+            
+            if (!flightData) {
+                showNotification('Nenhum voo selecionado. Redirecionando...', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            try {
+                selectedFlightData = JSON.parse(flightData);
+                searchParams = searchData ? JSON.parse(searchData) : null;
+                
+                console.log('Dados do voo carregados:', selectedFlightData);
+                console.log('Parâmetros de busca:', searchParams);
+                
+                updateFlightDisplay();
+                generatePassengerForms();
+                updatePricingSummary();
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados do voo:', error);
+                showNotification('Erro ao carregar dados do voo', 'error');
+            }
+        }
+
+        // ====================================
+        // ATUALIZAÇÃO DA INTERFACE
+        // ====================================
+
+        function updateFlightDisplay() {
+            const flight = selectedFlightData;
+            const outbound = flight.outbound;
+            
+            // Datas e horários
+            const departureDate = new Date(outbound.departure.at);
+            const arrivalDate = new Date(outbound.arrival.at);
+            
+            // Atualizar título da página
+            document.getElementById('breadcrumb-title').textContent = 
+                `Reserva ${outbound.carrierCode} ${outbound.number}`;
+            
+            // Atualizar número do voo
+            document.getElementById('flight-number').textContent = 
+                `${outbound.carrierCode} ${outbound.number}`;
+            
+            // Atualizar informações de partida
+            document.getElementById('departure-time').textContent = 
+                departureDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('departure-airport').textContent = outbound.departure.iataCode;
+            document.getElementById('departure-date').textContent = 
+                departureDate.toLocaleDateString('pt-BR', { 
+                    day: '2-digit', 
+                    month: 'short', 
+                    year: 'numeric' 
+                });
+            
+            // Atualizar informações de chegada
+            document.getElementById('arrival-time').textContent = 
+                arrivalDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('arrival-airport').textContent = outbound.arrival.iataCode;
+            document.getElementById('arrival-date').textContent = 
+                arrivalDate.toLocaleDateString('pt-BR', { 
+                    day: '2-digit', 
+                    month: 'short', 
+                    year: 'numeric' 
+                });
+            
+            // Atualizar duração e escalas
+            document.getElementById('flight-duration').textContent = formatDuration(outbound.duration);
+            document.getElementById('flight-stops').textContent = 
+                outbound.stops === 0 ? 'Voo Direto' : `${outbound.stops} Escala${outbound.stops > 1 ? 's' : ''}`;
+            
+            // Atualizar informações da sidebar
+            document.getElementById('airline-logo').textContent = outbound.carrierCode;
+            document.getElementById('airline-name').textContent = getAirlineName(outbound.carrierCode);
+            document.getElementById('flight-route-text').textContent = 
+                `${outbound.departure.iataCode} → ${outbound.arrival.iataCode}`;
+            
+            // Atualizar detalhes da reserva
+            document.getElementById('booking-departure-date').textContent = 
+                departureDate.toLocaleDateString('pt-BR');
+            document.getElementById('booking-departure-time').textContent = 
+                departureDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('booking-origin').textContent = 
+                `${outbound.departure.iataCode}`;
+            document.getElementById('booking-destination').textContent = 
+                `${outbound.arrival.iataCode}`;
+            document.getElementById('booking-duration').textContent = formatDuration(outbound.duration);
+            
+            // Atualizar número de passageiros
+            const totalPassengers = (searchParams?.adults || 1) + 
+                                   (searchParams?.children || 0) + 
+                                   (searchParams?.infants || 0);
+            document.getElementById('booking-passengers').textContent = totalPassengers;
+        }
+
+        function generatePassengerForms() {
+            const container = document.getElementById('passengers-container');
+            const adults = searchParams?.adults || 1;
+            const children = searchParams?.children || 0;
+            const infants = searchParams?.infants || 0;
+            
+            container.innerHTML = '';
+            
+            // Gerar formulários para adultos
+            for (let i = 0; i < adults; i++) {
+                container.appendChild(createPassengerForm(i + 1, 'Adulto'));
+            }
+            
+            // Gerar formulários para crianças
+            for (let i = 0; i < children; i++) {
+                container.appendChild(createPassengerForm(adults + i + 1, 'Criança'));
+            }
+            
+            // Gerar formulários para bebês
+            for (let i = 0; i < infants; i++) {
+                container.appendChild(createPassengerForm(adults + children + i + 1, 'Bebê'));
+            }
+        }
+
+        function createPassengerForm(passengerNumber, passengerType) {
+            const passengerCard = document.createElement('div');
+            passengerCard.className = 'passenger-card';
+            passengerCard.innerHTML = `
+                <div class="passenger-header">
+                    <div class="passenger-number">Passageiro ${passengerNumber}</div>
+                    <div class="passenger-type">${passengerType}</div>
+                </div>
+                <form class="passenger-form" data-passenger="${passengerNumber}" data-type="${passengerType}">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="required">Nome</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="form-input" name="firstName" placeholder="Nome" required>
+                            </div>
+                            <div class="error-message">Nome é obrigatório</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Sobrenome</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="form-input" name="lastName" placeholder="Sobrenome" required>
+                            </div>
+                            <div class="error-message">Sobrenome é obrigatório</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="required">Data de Nascimento</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" class="form-input" name="dateOfBirth" required>
+                            </div>
+                            <div class="error-message">Data de nascimento é obrigatória</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Gênero</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-venus-mars"></i>
+                                <select class="form-select" name="gender" required>
+                                    <option value="">Selecione</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Feminino</option>
+                                </select>
+                            </div>
+                            <div class="error-message">Gênero é obrigatório</div>
+                        </div>
+                    </div>
+                    ${passengerType !== 'Bebê' ? `
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="required">Número do Passaporte</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-passport"></i>
+                                <input type="text" class="form-input" name="passportNumber" placeholder="Número do passaporte" required>
+                            </div>
+                            <div class="error-message">Número do passaporte é obrigatório</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Validade do Passaporte</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" class="form-input" name="passportExpiry" required>
+                            </div>
+                            <div class="error-message">Validade do passaporte é obrigatória</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="required">Nacionalidade</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-flag"></i>
+                                <select class="form-select" name="nationality" required>
+                                    <option value="">Selecione</option>
+                                    <option value="BR">Brasileira</option>
+                                    <option value="US">Americana</option>
+                                    <option value="AR">Argentina</option>
+                                    <option value="PT">Portuguesa</option>
+                                    <option value="FR">Francesa</option>
+                                    <option value="DE">Alemã</option>
+                                    <option value="IT">Italiana</option>
+                                    <option value="ES">Espanhola</option>
+                                </select>
+                            </div>
+                            <div class="error-message">Nacionalidade é obrigatória</div>
+                        </div>
+                        ${passengerNumber === 1 ? `
+                        <div class="form-group">
+                            <label>Email</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="form-input" name="email" placeholder="email@exemplo.com">
+                            </div>
+                        </div>
+                        ` : '<div class="form-group"></div>'}
+                    </div>
+                    ` : ''}
+                </form>
+            `;
+            
+            return passengerCard;
+        }
+
+        function updatePricingSummary() {
+            const flight = selectedFlightData;
+            const baseFare = flight.price.base;
+            const taxes = flight.price.taxes?.reduce((sum, tax) => sum + tax.amount, 0) || 0;
+            const serviceFee = 45; // Taxa fixa de serviço
+            const subtotal = baseFare + taxes + serviceFee;
+            
+            document.getElementById('base-fare').textContent = `R$ ${baseFare.toFixed(2)}`;
+            document.getElementById('taxes-fees').textContent = `R$ ${taxes.toFixed(2)}`;
+            document.getElementById('service-fee').textContent = `R$ ${serviceFee.toFixed(2)}`;
+            document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2)}`;
+            document.getElementById('total-amount').textContent = `R$ ${subtotal.toFixed(2)}`;
+        }
+
+        // ====================================
+        // GERAÇÃO DE CÓDIGO DE RESERVA
+        // ====================================
+
+        function generateBookingCode() {
+            const prefix = 'FMD';
+            const year = new Date().getFullYear();
+            const random = Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+            bookingCode = `${prefix}-${year}-${random}`;
+            
+            document.getElementById('booking-code').value = bookingCode;
+        }
+
+        // ====================================
+        // CONFIGURAÇÃO DE EVENTOS
+        // ====================================
+
+        function setupEventListeners() {
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Formatação de campos
+            setupFieldFormatting();
+
+            // Validação em tempo real
+            setupRealTimeValidation();
+
+            // Submissão do formulário
+            document.getElementById('paymentForm').addEventListener('submit', handleFormSubmission);
+        }
+
+        function setupFieldFormatting() {
+            // Formatação do número do cartão
+            const cardNumberInput = document.querySelector('input[name="cardNumber"]');
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
+                let formattedValue = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+                
+                if (formattedValue.length <= 19) {
+                    e.target.value = formattedValue;
+                }
+                
+                // Detectar bandeira do cartão
+                detectCardBrand(value);
+            });
+
+            // Formatação da data de validade
+            const expiryInput = document.querySelector('input[name="cardExpiry"]');
+            expiryInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+
+            // Formatação do CVV
+            const cvvInput = document.querySelector('input[name="cardCVV"]');
+            cvvInput.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+
+            // Formatação do telefone
+            const phoneInput = document.querySelector('input[name="phone"]');
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 11) {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            });
+        }
+
+        function setupRealTimeValidation() {
+            const inputs = document.querySelectorAll('.form-input, .form-select');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('error')) {
+                        validateField(this);
+                    }
+                });
+            });
+        }
+
+        function setupFormValidation() {
+            // Validação será feita no momento da submissão
+            console.log('Validação de formulário configurada');
+        }
+
+        // ====================================
+        // VALIDAÇÃO DE CAMPOS
+        // ====================================
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const fieldName = field.name;
+            const fieldType = field.type;
+            let isValid = true;
+            let errorMessage = '';
+
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                errorMessage = `${getFieldLabel(fieldName)} é obrigatório`;
+            } else if (value) {
+                switch (fieldType) {
+                    case 'email':
+                        isValid = validateEmail(value);
+                        errorMessage = 'Email inválido';
+                        break;
+                    case 'tel':
+                        isValid = validatePhone(value);
+                        errorMessage = 'Telefone inválido';
+                        break;
+                    case 'date':
+                        isValid = validateDate(value, fieldName);
+                        errorMessage = getDateErrorMessage(fieldName);
+                        break;
+                    default:
+                        if (fieldName === 'cardNumber') {
+                            isValid = validateCardNumber(value);
+                            errorMessage = 'Número do cartão inválido';
+                        } else if (fieldName === 'cardExpiry') {
+                            isValid = validateCardExpiry(value);
+                            errorMessage = 'Data de validade inválida';
+                        } else if (fieldName === 'cardCVV') {
+                            isValid = validateCVV(value);
+                            errorMessage = 'CVV inválido';
+                        } else if (fieldName === 'passportNumber') {
+                            isValid = validatePassport(value);
+                            errorMessage = 'Número do passaporte inválido';
+                        }
+                }
+            }
+
+            updateFieldValidation(field, isValid, errorMessage);
+            return isValid;
+        }
+
+        function updateFieldValidation(field, isValid, errorMessage) {
+            const errorDiv = field.closest('.form-group').querySelector('.error-message');
+            
+            if (isValid) {
+                field.classList.remove('error');
+                if (errorDiv) {
+                    errorDiv.style.display = 'none';
+                }
             } else {
-                header.classList.remove('scrolled');
+                field.classList.add('error');
+                if (errorDiv) {
+                    errorDiv.textContent = errorMessage;
+                    errorDiv.style.display = 'block';
+                }
             }
-        });
+        }
 
-        // Form validation and formatting
-        const personalForm = document.getElementById('personalForm');
-        const paymentForm = document.getElementById('paymentForm');
+        // ====================================
+        // FUNÇÕES DE VALIDAÇÃO
+        // ====================================
 
-        // Credit card number formatting
-        const cardNumberInput = document.querySelector('input[placeholder="1234 5678 9012 3456"]');
-        cardNumberInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
-            let formattedValue = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            return cleaned.length === 10 || cleaned.length === 11;
+        }
+
+        function validateDate(date, fieldName) {
+            const dateObj = new Date(date);
+            const today = new Date();
             
-            if (formattedValue.length <= 19) {
-                e.target.value = formattedValue;
+            if (fieldName === 'dateOfBirth') {
+                return dateObj < today;
+            } else if (fieldName === 'passportExpiry') {
+                return dateObj > today;
             }
             
-            // Detect card type
-            detectCardType(value);
-        });
+            return true;
+        }
 
-        // Expiry date formatting
-        const expiryInput = document.querySelector('input[placeholder="MM/AA"]');
-        expiryInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            e.target.value = value;
-        });
+        function validateCardNumber(cardNumber) {
+            const cleaned = cardNumber.replace(/\s/g, '');
+            return cleaned.length >= 13 && cleaned.length <= 19 && /^\d+$/.test(cleaned);
+        }
 
-        // CVV formatting
-        const cvvInput = document.querySelector('input[placeholder="123"]');
-        cvvInput.addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
+        function validateCardExpiry(expiry) {
+            const match = expiry.match(/^(\d{2})\/(\d{2})$/);
+            if (!match) return false;
+            
+            const month = parseInt(match[1], 10);
+            const year = parseInt('20' + match[2], 10);
+            const now = new Date();
+            const expiryDate = new Date(year, month - 1);
+            
+            return month >= 1 && month <= 12 && expiryDate > now;
+        }
 
-        // Phone formatting
-        const phoneInput = document.querySelector('input[placeholder="(11) 99999-9999"]');
-        phoneInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            let formattedValue = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-            if (value.length <= 11) {
-                e.target.value = formattedValue;
-            }
-        });
+        function validateCVV(cvv) {
+            return cvv.length >= 3 && cvv.length <= 4 && /^\d+$/.test(cvv);
+        }
 
-        // Card type detection
-        function detectCardType(number) {
-            const cardSelect = document.querySelector('select[required]');
-            const firstDigit = number.charAt(0);
-            const firstTwoDigits = number.substring(0, 2);
+        function validatePassport(passport) {
+            return passport.length >= 6 && passport.length <= 12;
+        }
+
+        // ====================================
+        // DETECÇÃO DE BANDEIRA DO CARTÃO
+        // ====================================
+
+        function detectCardBrand(cardNumber) {
+            const brandSelect = document.querySelector('select[name="cardBrand"]');
+            const firstDigit = cardNumber.charAt(0);
+            const firstTwoDigits = cardNumber.substring(0, 2);
+            const firstFourDigits = cardNumber.substring(0, 4);
             
             if (firstDigit === '4') {
-                cardSelect.value = 'visa';
+                brandSelect.value = 'visa';
             } else if (firstTwoDigits >= '51' && firstTwoDigits <= '55') {
-                cardSelect.value = 'mastercard';
+                brandSelect.value = 'mastercard';
             } else if (firstTwoDigits === '34' || firstTwoDigits === '37') {
-                cardSelect.value = 'amex';
+                brandSelect.value = 'american-express';
+            } else if (firstFourDigits === '6011' || firstTwoDigits === '65') {
+                brandSelect.value = 'discover';
+            } else if (firstFourDigits.startsWith('50') || firstFourDigits.startsWith('51') || 
+                      firstFourDigits.startsWith('52') || firstFourDigits.startsWith('53') || 
+                      firstFourDigits.startsWith('54') || firstFourDigits.startsWith('55')) {
+                brandSelect.value = 'elo';
             }
         }
 
-        // Payment form submission
-        paymentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // ====================================
+        // SUBMISSÃO DO FORMULÁRIO
+        // ====================================
+
+        async function handleFormSubmission(event) {
+            event.preventDefault();
             
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
+            if (!validateAllForms()) {
+                showNotification('Por favor, corrija os erros no formulário', 'error');
+                return;
+            }
+
+            const bookingData = collectBookingData();
             
-            // Show loading state
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando Pagamento...';
-            submitBtn.disabled = true;
-            submitBtn.classList.add('loading');
+            if (!bookingData) {
+                showNotification('Erro ao coletar dados do formulário', 'error');
+                return;
+            }
+
+            await processBooking(bookingData);
+        }
+
+        function validateAllForms() {
+            let isValid = true;
             
-            // Simulate payment processing
-            setTimeout(() => {
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> Pagamento Confirmado!';
-                submitBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+            // Validar todos os campos obrigatórios
+            const requiredFields = document.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+
+            // Validar checkboxes obrigatórios
+            const requiredCheckboxes = document.querySelectorAll('input[type="checkbox"][required]');
+            requiredCheckboxes.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    isValid = false;
+                    showNotification('Você deve aceitar os termos e condições', 'error');
+                }
+            });
+
+            return isValid;
+        }
+
+        function collectBookingData() {
+            try {
+                const travelers = [];
+                const passengerForms = document.querySelectorAll('.passenger-form');
                 
-                // Update progress
-                updateProgress();
+                passengerForms.forEach((form, index) => {
+                    const formData = new FormData(form);
+                    const passengerType = form.getAttribute('data-type');
+                    
+                    const traveler = {
+                        id: index + 1,
+                        dateOfBirth: formData.get('dateOfBirth'),
+                        name: {
+                            firstName: formData.get('firstName'),
+                            lastName: formData.get('lastName')
+                        },
+                        gender: formData.get('gender'),
+                        travelerType: passengerType === 'Adulto' ? 'ADULT' : 
+                                     passengerType === 'Criança' ? 'CHILD' : 'HELD_INFANT'
+                    };
+
+                    // Adicionar informações de documento se não for bebê
+                    if (passengerType !== 'Bebê') {
+                        traveler.documents = [{
+                            documentType: 'PASSPORT',
+                            number: formData.get('passportNumber'),
+                            expiryDate: formData.get('passportExpiry'),
+                            issuanceCountry: formData.get('nationality'),
+                            validityCountry: formData.get('nationality'),
+                            nationality: formData.get('nationality'),
+                            holder: true
+                        }];
+                    }
+
+                    // Adicionar informações de contato para o primeiro passageiro
+                    if (index === 0) {
+                        const contactForm = document.getElementById('contactForm');
+                        const contactData = new FormData(contactForm);
+                        
+                        traveler.contact = {
+                            emailAddress: contactData.get('email'),
+                            phones: [{
+                                deviceType: 'MOBILE',
+                                countryCallingCode: '55',
+                                number: contactData.get('phone')?.replace(/\D/g, '')
+                            }]
+                        };
+                    }
+
+                    travelers.push(traveler);
+                });
+
+                const contacts = [{
+                    addresseeName: {
+                        firstName: travelers[0]?.name.firstName,
+                        lastName: travelers[0]?.name.lastName
+                    },
+                    companyName: 'FlightsMND',
+                    purpose: 'STANDARD',
+                    phones: travelers[0]?.contact?.phones,
+                    emailAddress: travelers[0]?.contact?.emailAddress
+                }];
+
+                return {
+                    flightOffer: selectedFlightData.rawOffer || selectedFlightData,
+                    travelers: travelers,
+                    contacts: contacts,
+                    payment: collectPaymentData(),
+                    bookingCode: bookingCode
+                };
+
+            } catch (error) {
+                console.error('Erro ao coletar dados:', error);
+                return null;
+            }
+        }
+
+        function collectPaymentData() {
+            const paymentForm = document.getElementById('paymentForm');
+            const formData = new FormData(paymentForm);
+            
+            return {
+                cardNumber: formData.get('cardNumber'),
+                cardName: formData.get('cardName'),
+                cardExpiry: formData.get('cardExpiry'),
+                cardCVV: formData.get('cardCVV'),
+                cardBrand: formData.get('cardBrand')
+            };
+        }
+
+        // ====================================
+        // PROCESSAMENTO DA RESERVA
+        // ====================================
+
+        async function processBooking(bookingData) {
+            try {
+                showLoading('Processando reserva...', 'Isso pode levar alguns minutos');
                 
-                setTimeout(() => {
+                // Primeiro, confirmar o preço do voo
+                await confirmFlightPrice();
+                
+                // Depois, criar a reserva
+                const response = await fetch(`${API_BASE}/flights/book`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookingData)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Salvar dados da reserva
+                    sessionStorage.setItem('bookingConfirmation', JSON.stringify(result.data));
+                    sessionStorage.setItem('bookingReference', result.bookingReference);
+                    
+                    hideLoading();
                     showSuccessMessage();
-                }, 1000);
-
-                setTimeout(() => {
-                    window.location.href = 'index.html'; // Redirect to home after success
-                }, 5000);
+                    
+                    // Redirecionar após sucesso
+                    setTimeout(() => {
+                        window.location.href = 'booking-success.html';
+                    }, 3000);
+                    
+                } else {
+                    throw new Error(result.error || 'Erro ao processar reserva');
+                }
                 
-            }, 3000);
-            
-        });
-
-        // Update progress indicator
-        function updateProgress() {
-            const currentStep = document.querySelector('.progress-step.active');
-            const nextStep = currentStep.nextElementSibling;
-            
-            if (nextStep) {
-                currentStep.classList.remove('active');
-                currentStep.classList.add('completed');
-                currentStep.querySelector('.step-circle').innerHTML = '<i class="fas fa-check"></i>';
-                
-                nextStep.classList.add('active');
+            } catch (error) {
+                console.error('Erro ao processar reserva:', error);
+                hideLoading();
+                showNotification('Erro ao processar reserva: ' + error.message, 'error');
             }
         }
 
-        // Success message
+        async function confirmFlightPrice() {
+            try {
+                const response = await fetch(`${API_BASE}/flights/price-confirm`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        flightOffer: selectedFlightData.rawOffer || selectedFlightData
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    confirmedPricing = result.data;
+                    
+                    // Verificar se o preço mudou
+                    if (confirmedPricing.flightOffers && confirmedPricing.flightOffers[0]) {
+                        const newPrice = confirmedPricing.flightOffers[0].price;
+                        if (newPrice.total !== selectedFlightData.price.total) {
+                            showNotification('Preço do voo foi atualizado!', 'warning');
+                            selectedFlightData.price = newPrice;
+                            updatePricingSummary();
+                        }
+                    }
+                } else {
+                    throw new Error(result.error || 'Erro ao confirmar preço');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao confirmar preço:', error);
+                showNotification('Não foi possível confirmar o preço. Prosseguindo com o preço original.', 'warning');
+            }
+        }
+
+        // ====================================
+        // FUNÇÕES DE INTERFACE
+        // ====================================
+
+        function showLoading(text = 'Processando...', description = 'Por favor, aguarde...') {
+            const overlay = document.getElementById('loading-overlay');
+            const loadingText = document.getElementById('loading-text');
+            const loadingDescription = document.getElementById('loading-description');
+            
+            loadingText.textContent = text;
+            loadingDescription.textContent = description;
+            overlay.classList.add('active');
+        }
+
+        function hideLoading() {
+            const overlay = document.getElementById('loading-overlay');
+            overlay.classList.remove('active');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${getNotificationIcon(type)}"></i>
+                    <span>${message}</span>
+                    <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Mostrar notificação
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Remover após 5 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+
         function showSuccessMessage() {
             const messageDiv = document.createElement('div');
             messageDiv.style.cssText = `
@@ -1263,27 +2159,38 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                z-index: 9999;
-                padding: 30px 40px;
+                z-index: 10000;
+                padding: 40px;
                 background: white;
                 border-radius: 20px;
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
                 text-align: center;
                 animation: popIn 0.5s ease-out;
+                max-width: 500px;
+                width: 90%;
             `;
             
             messageDiv.innerHTML = `
                 <div style="color: #4CAF50; font-size: 60px; margin-bottom: 20px;">
                     <i class="fas fa-check-circle"></i>
                 </div>
-                <h3 style="color: #333; margin-bottom: 15px;">Reserva Confirmada!</h3>
-                <p style="color: #666; margin-bottom: 20px;">Sua reserva foi processada com sucesso.</p>
-                <p style="color: #667eea; font-weight: 600;">ID: YTR-2025-001234</p>
+                <h3 style="color: #333; margin-bottom: 15px; font-size: 24px;">Reserva Confirmada!</h3>
+                <p style="color: #666; margin-bottom: 20px; font-size: 16px;">
+                    Sua reserva foi processada com sucesso. Você receberá um email com os detalhes.
+                </p>
+                <p style="color: #667eea; font-weight: 600; font-size: 18px;">
+                    Código: ${bookingCode}
+                </p>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <p style="color: #999; font-size: 14px;">
+                        Redirecionando em 3 segundos...
+                    </p>
+                </div>
             `;
             
             document.body.appendChild(messageDiv);
             
-            // Add overlay
+            // Adicionar overlay
             const overlay = document.createElement('div');
             overlay.style.cssText = `
                 position: fixed;
@@ -1292,94 +2199,123 @@
                 right: 0;
                 bottom: 0;
                 background: rgba(0, 0, 0, 0.5);
-                z-index: 9998;
+                z-index: 9999;
                 animation: fadeIn 0.3s ease-out;
             `;
             document.body.appendChild(overlay);
-            
-            // Remove after 4 seconds
-            setTimeout(() => {
-                messageDiv.style.animation = 'popOut 0.3s ease-out forwards';
-                overlay.style.animation = 'fadeOut 0.3s ease-out forwards';
-                setTimeout(() => {
-                    document.body.removeChild(messageDiv);
-                    document.body.removeChild(overlay);
-                }, 300);
-            }, 4000);
         }
 
-        // Favorite button toggle
-        const favoriteBtn = document.querySelector('.favorite-btn');
-        favoriteBtn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            const icon = this.querySelector('i');
-            if (this.classList.contains('active')) {
-                icon.style.color = '#e74c3c';
-                this.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 200);
-            } else {
-                icon.style.color = '#667eea';
+        function showTerms() {
+            showNotification('Termos e condições carregados', 'info');
+        }
+
+        function showPaymentTerms() {
+            showNotification('Condições de pagamento carregadas', 'info');
+        }
+
+        // ====================================
+        // FUNÇÕES AUXILIARES
+        // ====================================
+
+        function formatDuration(duration) {
+            const matches = duration.match(/PT(\d+H)?(\d+M)?/);
+            const hours = matches[1] ? matches[1].replace('H', 'h ') : '';
+            const minutes = matches[2] ? matches[2].replace('M', 'm') : '';
+            return (hours + minutes).trim();
+        }
+
+        function getAirlineName(code) {
+            const airlines = {
+                'AD': 'Azul',
+                'G3': 'GOL',
+                'JJ': 'LATAM',
+                'LA': 'LATAM',
+                'TP': 'TAP',
+                'AF': 'Air France',
+                'LH': 'Lufthansa',
+                'AA': 'American Airlines',
+                'DL': 'Delta',
+                'UA': 'United',
+                'BA': 'British Airways',
+                'KL': 'KLM',
+                'EK': 'Emirates',
+                'QR': 'Qatar Airways'
+            };
+            return airlines[code] || code;
+        }
+
+        function getFieldLabel(fieldName) {
+            const labels = {
+                'firstName': 'Nome',
+                'lastName': 'Sobrenome',
+                'dateOfBirth': 'Data de nascimento',
+                'gender': 'Gênero',
+                'nationality': 'Nacionalidade',
+                'passportNumber': 'Número do passaporte',
+                'passportExpiry': 'Validade do passaporte',
+                'email': 'Email',
+                'phone': 'Telefone',
+                'cardNumber': 'Número do cartão',
+                'cardName': 'Nome no cartão',
+                'cardExpiry': 'Validade do cartão',
+                'cardCVV': 'CVV',
+                'cardBrand': 'Bandeira do cartão'
+            };
+            return labels[fieldName] || fieldName;
+        }
+
+        function getDateErrorMessage(fieldName) {
+            if (fieldName === 'dateOfBirth') {
+                return 'Data de nascimento deve ser anterior a hoje';
+            } else if (fieldName === 'passportExpiry') {
+                return 'Passaporte deve ter validade futura';
             }
-        });
+            return 'Data inválida';
+        }
 
-        // Input focus animations
-        const inputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'scale(1.02)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'scale(1)';
-            });
-        });
+        function getNotificationIcon(type) {
+            const icons = {
+                'success': 'check-circle',
+                'error': 'exclamation-circle',
+                'warning': 'exclamation-triangle',
+                'info': 'info-circle'
+            };
+            return icons[type] || 'info-circle';
+        }
 
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
+        // ====================================
+        // ESTILOS ADICIONAIS
+        // ====================================
+
+        const additionalStyles = document.createElement('style');
+        additionalStyles.textContent = `
             @keyframes popIn {
                 from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
                 to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
             }
-            @keyframes popOut {
-                from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                to { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            }
+            
             @keyframes fadeIn {
                 from { opacity: 0; }
                 to { opacity: 1; }
             }
-            @keyframes fadeOut {
-                from { opacity: 1; }
-                to { opacity: 0; }
+            
+            .form-input:valid {
+                border-color: #4CAF50;
+            }
+            
+            .form-input:invalid {
+                border-color: #e74c3c;
+            }
+            
+            .passenger-form {
+                animation: slideUp 0.4s ease-out;
+            }
+            
+            .payment-table .highlight {
+                background: rgba(102, 126, 234, 0.1);
             }
         `;
-        document.head.appendChild(style);
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe form cards for animation
-        document.querySelectorAll('.form-card').forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = `all 0.6s ease ${index * 0.2}s`;
-            observer.observe(el);
-        });
+        document.head.appendChild(additionalStyles);
     </script>
 </body>
 </html>
