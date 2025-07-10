@@ -944,12 +944,14 @@
                             <div class="input-wrapper">
                                 <i class="fas fa-plane-departure"></i>
                                 <select class="form-select">
-                                    <option value="">Selecione o aeroporto de origem</option>
-                                    <option value="gru">São Paulo (GRU)</option>
-                                    <option value="gig">Rio de Janeiro (GIG)</option>
-                                    <option value="bsb">Brasília (BSB)</option>
-                                    <option value="sal">Salvador (SSA)</option>
-                                </select>
+    <option value="">Selecione o aeroporto de origem</option>
+    <option value="GRU">São Paulo (GRU)</option>
+    <option value="GIG">Rio de Janeiro (GIG)</option>
+    <option value="BSB">Brasília (BSB)</option>
+    <option value="SSA">Salvador (SSA)</option>
+    <option value="FOR">Fortaleza (FOR)</option>
+    <option value="REC">Recife (REC)</option>
+</select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -957,12 +959,15 @@
                             <div class="input-wrapper">
                                 <i class="fas fa-plane-arrival"></i>
                                 <select class="form-select">
-                                    <option value="">Selecione o destino</option>
-                                    <option value="nyc">Nova York</option>
-                                    <option value="lhr">Londres</option>
-                                    <option value="cdg">Paris</option>
-                                    <option value="nrt">Tóquio</option>
-                                </select>
+    <option value="">Selecione o destino</option>
+    <option value="GRU">São Paulo (GRU)</option>
+    <option value="GIG">Rio de Janeiro (GIG)</option>
+    <option value="BSB">Brasília (BSB)</option>
+    <option value="SSA">Salvador (SSA)</option>
+    <option value="MIA">Miami (MIA)</option>
+    <option value="JFK">Nova York (JFK)</option>
+    <option value="LHR">Londres (LHR)</option>
+</select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -1364,6 +1369,7 @@
             if (!activeTab) return;
 
             const formData = collectSearchData(activeTab);
+            console.log('Dados do formulário:', formData);
 
             // Validações
             if (!formData.origin || !formData.destination || !formData.departureDate) {
@@ -1374,6 +1380,8 @@
             // Extrair códigos IATA dos campos (formato: "GRU - Aeroporto de Guarulhos")
             const originCode = extractIATACode(formData.origin);
             const destinationCode = extractIATACode(formData.destination);
+
+            
 
             if (!originCode || !destinationCode) {
                 showNotification('Por favor, selecione aeroportos válidos da lista', 'error');
@@ -1428,12 +1436,7 @@
 
                 // Aguardar um pouco e redirecionar
                 setTimeout(() => {
-                    // Aqui você pode redirecionar para página de resultados
-                    // window.location.href = 'flight-results.html';
-
-                    // Por enquanto, vamos mostrar os resultados no console e em modal
-                    console.log('Voos encontrados:', data.data);
-                    showFlightResultsModal(data.data.slice(0, 5)); // Mostrar apenas 5 primeiros
+                    window.location.href = 'flight-results.html';
                 }, 1000);
 
             } catch (error) {
@@ -1577,41 +1580,99 @@
             observer.observe(el);
         });
 
-        function collectSearchData(activeTab) {
-            const data = {};
-
-            // Campos básicos
-            data.origin = activeTab.querySelector('select[name="origin"]')?.nextElementSibling?.value ||
-                activeTab.querySelector('input[placeholder*="origem"]')?.value || '';
-            data.destination = activeTab.querySelector('select[name="destination"]')?.nextElementSibling?.value ||
-                activeTab.querySelector('input[placeholder*="destino"]')?.value || '';
-            data.departureDate = activeTab.querySelector('input[type="date"][name="departureDate"]')?.value ||
-                activeTab.querySelector('input[type="date"]')?.value || '';
-            data.returnDate = activeTab.querySelector('input[name="returnDate"]')?.value || '';
-
-            // Passageiros
-            data.adults = activeTab.querySelector('select[name="adults"]')?.value || '1';
-            data.children = activeTab.querySelector('select[name="children"]')?.value || '0';
-            data.infants = activeTab.querySelector('select[name="infants"]')?.value || '0';
-
+        // Função para coletar dados do formulário - VERSÃO CORRIGIDA
+function collectSearchData(activeTab) {
+    const data = {};
+    
+    console.log('Coletando dados da aba:', activeTab.id);
+    
+    // Buscar selects de origem e destino na aba ativa
+    const formGroups = activeTab.querySelectorAll('.form-group');
+    
+    formGroups.forEach(group => {
+        const label = group.querySelector('label')?.textContent.toLowerCase();
+        const select = group.querySelector('.form-select');
+        const input = group.querySelector('input');
+        
+        if (label && label.includes('partindo')) {
+            // Campo de origem
+            data.origin = select ? select.value : (input ? input.value : '');
+        } else if (label && label.includes('indo')) {
+            // Campo de destino  
+            data.destination = select ? select.value : (input ? input.value : '');
+        } else if (label && label.includes('partida')) {
+            // Data de partida
+            data.departureDate = input ? input.value : '';
+        } else if (label && label.includes('volta')) {
+            // Data de volta
+            data.returnDate = input ? input.value : '';
+        } else if (label && label.includes('adultos')) {
+            // Adultos
+            data.adults = select ? select.value : '1';
+        } else if (label && label.includes('crianças')) {
+            // Crianças
+            data.children = select ? select.value : '0';
+        } else if (label && label.includes('classe')) {
             // Classe
-            data.travelClass = activeTab.querySelector('select[name="travelClass"]')?.value || 'ECONOMY';
-
-            return data;
+            data.travelClass = select ? select.value : 'ECONOMY';
         }
+    });
+    
+    // Buscar campos de data diretamente se não encontrados
+    if (!data.departureDate) {
+        const dateInputs = activeTab.querySelectorAll('input[type="date"]');
+        if (dateInputs.length > 0) data.departureDate = dateInputs[0].value;
+        if (dateInputs.length > 1) data.returnDate = dateInputs[1].value;
+    }
+    
+    // Valores padrão se não encontrados
+    data.adults = data.adults || '1';
+    data.children = data.children || '0';
+    data.infants = '0'; // Assumir 0 bebês por padrão
+    data.travelClass = data.travelClass || 'ECONOMY';
+    
+    console.log('Dados coletados:', data);
+    return data;
+}
 
-        function extractIATACode(text) {
-            if (!text) return null;
-
-            // Se já é um código IATA (3 letras)
-            if (/^[A-Z]{3}$/.test(text.trim())) {
-                return text.trim();
-            }
-
-            // Extrair do formato "GRU - Nome do aeroporto"
-            const match = text.match(/^([A-Z]{3})\s*-/);
-            return match ? match[1] : null;
-        }
+      // Função para extrair código IATA - VERSÃO CORRIGIDA
+function extractIATACode(text) {
+    if (!text) return null;
+    
+    console.log('Extraindo IATA de:', text);
+    
+    // Se já é um código IATA (3 letras)
+    if (/^[A-Z]{3}$/i.test(text.trim())) {
+        return text.trim().toUpperCase();
+    }
+    
+    // Extrair do formato "gru" -> "GRU"
+    if (/^[a-z]{3}$/i.test(text.trim())) {
+        return text.trim().toUpperCase();
+    }
+    
+    // Extrair do formato "GRU - Nome do aeroporto" 
+    const match = text.match(/^([A-Z]{3})\s*-/i);
+    if (match) {
+        return match[1].toUpperCase();
+    }
+    
+    // Se é um dos valores do seu select, converter
+    const airportCodes = {
+        'gru': 'GRU',
+        'gig': 'GIG', 
+        'bsb': 'BSB',
+        'sal': 'SSA'
+    };
+    
+    const lowerText = text.toLowerCase();
+    if (airportCodes[lowerText]) {
+        return airportCodes[lowerText];
+    }
+    
+    console.log('Não foi possível extrair IATA de:', text);
+    return null;
+}
 
         function showNotification(message, type = 'info') {
             // Remover notificação anterior
