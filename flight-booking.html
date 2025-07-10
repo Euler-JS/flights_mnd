@@ -792,6 +792,9 @@
 
     <!-- Main Content -->
     <main class="main-content">
+        <div class="flight-summary">
+    <!-- Será preenchido dinamicamente -->
+</div>
         <div class="container">
             <!-- Progress Indicator -->
             <div class="progress-indicator fade-in">
@@ -832,7 +835,7 @@
                                 Suas Informações Pessoais
                             </h3>
                         </div>
-                        <div class="form-content">
+                        <div class="form-content passenger-form">
                             <form id="personalForm">
                                 <div class="form-row">
                                     <div class="form-group">
@@ -1381,5 +1384,523 @@
             observer.observe(el);
         });
     </script>
+
+    <script>
+// ====================================
+// INTEGRAÇÃO COM VOO SELECIONADO
+// ====================================
+
+const API_BASE = 'http://localhost:3000/api';
+let selectedFlightData = null;
+let confirmedPricing = null;
+
+// Inicializar página
+document.addEventListener('DOMContentLoaded', function() {
+    loadSelectedFlight();
+    setupFormValidation();
+});
+
+// Carregar dados do voo selecionado
+function loadSelectedFlight() {
+    const flightData = sessionStorage.getItem('selectedFlight');
+    
+    if (!flightData) {
+        showNotification('Nenhum voo selecionado. Redirecionando...', 'error');
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2000);
+        return;
+    }
+
+    try {
+        selectedFlightData = JSON.parse(flightData);
+        console.log('Voo selecionado:', selectedFlightData);
+        
+        updateFlightSummary();
+        confirmFlightPrice();
+        
+    } catch (error) {
+        console.error('Erro ao carregar voo:', error);
+        showNotification('Erro ao carregar dados do voo', 'error');
+    }
+}
+
+// Atualizar resumo do voo na página
+function updateFlightSummary() {
+    const flight = selectedFlightData;
+    
+    // Atualizar informações básicas do voo
+    updateFlightInfo(flight);
+    
+    // Atualizar preço no resumo
+    updatePriceSummary(flight);
+    
+    // Atualizar título da página
+    document.title = `Reserva ${flight.outbound.carrierCode} ${flight.outbound.flightNumber} - FlightsMND`;
+}
+
+// Atualizar informações do voo
+function updateFlightInfo(flight) {
+    const departureTime = new Date(flight.outbound.departure.at);
+    const arrivalTime = new Date(flight.outbound.arrival.at);
+    
+    // Procurar e atualizar elementos na página
+    const flightNumberElements = document.querySelectorAll('[data-flight-number]');
+    flightNumberElements.forEach(el => {
+        el.textContent = `${flight.outbound.carrierCode} ${flight.outbound.flightNumber}`;
+    });
+    
+    const routeElements = document.querySelectorAll('[data-route]');
+    routeElements.forEach(el => {
+        el.textContent = `${flight.outbound.departure.iataCode} → ${flight.outbound.arrival.iataCode}`;
+    });
+    
+    const departureElements = document.querySelectorAll('[data-departure]');
+    departureElements.forEach(el => {
+        el.textContent = `${departureTime.toLocaleString('pt-BR')}`;
+    });
+    
+    const arrivalElements = document.querySelectorAll('[data-arrival]');
+    arrivalElements.forEach(el => {
+        el.textContent = `${arrivalTime.toLocaleString('pt-BR')}`;
+    });
+    
+    const durationElements = document.querySelectorAll('[data-duration]');
+    durationElements.forEach(el => {
+        el.textContent = formatDuration(flight.outbound.duration);
+    });
+    
+    const stopsElements = document.querySelectorAll('[data-stops]');
+    stopsElements.forEach(el => {
+        el.textContent = flight.outbound.stops === 0 ? 'Voo Direto' : `${flight.outbound.stops} Parada${flight.outbound.stops > 1 ? 's' : ''}`;
+    });
+    
+    // Atualizar elementos específicos se existirem
+    const flightSummary = document.querySelector('.flight-summary');
+    if (flightSummary) {
+        flightSummary.innerHTML = `
+            <div class="flight-header">
+                <h3>${flight.outbound.carrierCode} ${flight.outbound.flightNumber}</h3>
+                <span class="flight-date">${departureTime.toLocaleDateString('pt-BR')}</span>
+            </div>
+            <div class="flight-route">
+                <div class="departure">
+                    <div class="time">${departureTime.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'})}</div>
+                    <div class="airport">${flight.outbound.departure.iataCode}</div>
+                </div>
+                <div class="flight-info">
+                    <div class="duration">${formatDuration(flight.outbound.duration)}</div>
+                    <div class="stops">${flight.outbound.stops === 0 ? 'Direto' : `${flight.outbound.stops} parada(s)`}</div>
+                </div>
+                <div class="arrival">
+                    <div class="time">${arrivalTime.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'})}</div>
+                    <div class="airport">${flight.outbound.arrival.iataCode}</div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// Atualizar resumo de preços
+function updatePriceSummary(flight) {
+    const priceElements = document.querySelectorAll('[data-price]');
+    priceElements.forEach(el => {
+        el.textContent = `R$ ${flight.price.total.toFixed(2)}`;
+    });
+    
+    const basePriceElements = document.querySelectorAll('[data-base-price]');
+    basePriceElements.forEach(el => {
+        el.textContent = `R$ ${flight.price.base.toFixed(2)}`;
+    });
+    
+    // Atualizar resumo detalhado se existir
+    const priceSummary = document.querySelector('.price-summary');
+    if (priceSummary) {
+        let taxesTotal = 0;
+        if (flight.price.taxes) {
+            taxesTotal = flight.price.taxes.reduce((sum, tax) => sum + tax.amount, 0);
+        }
+        
+        priceSummary.innerHTML = `
+            <div class="price-summary">
+                <!-- Será preenchido dinamicamente -->
+            </div>
+            <div class="price-breakdown">
+                <div class="price-item">
+                    <span>Tarifa Base</span>
+                    <span>R$ ${flight.price.base.toFixed(2)}</span>
+                </div>
+                <div class="price-item">
+                    <span>Taxas e Impostos</span>
+                    <span>R$ ${taxesTotal.toFixed(2)}</span>
+                </div>
+                <div class="price-item total">
+                    <span><strong>Total</strong></span>
+                    <span><strong>R$ ${flight.price.total.toFixed(2)}</strong></span>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// Confirmar preço do voo na API
+async function confirmFlightPrice() {
+    try {
+        showLoading('Confirmando preço do voo...');
+        
+        const response = await fetch(`${API_BASE}/flights/price-confirm`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                flightOffer: selectedFlightData.rawOffer || selectedFlightData
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            confirmedPricing = data.data;
+            console.log('Preço confirmado:', confirmedPricing);
+            
+            // Atualizar preços se mudaram
+            if (confirmedPricing.flightOffers && confirmedPricing.flightOffers[0]) {
+                const newPrice = confirmedPricing.flightOffers[0].price;
+                if (newPrice.total !== selectedFlightData.price.total) {
+                    showNotification('Preço do voo foi atualizado!', 'info');
+                    selectedFlightData.price = newPrice;
+                    updatePriceSummary(selectedFlightData);
+                }
+            }
+            
+            showNotification('Preço confirmado com sucesso!', 'success');
+        } else {
+            throw new Error(data.error || 'Erro ao confirmar preço');
+        }
+        
+    } catch (error) {
+        console.error('Erro ao confirmar preço:', error);
+        showNotification('Não foi possível confirmar o preço. Prosseguindo com o preço original.', 'warning');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Processar reserva
+async function processBooking() {
+    const bookingData = collectBookingData();
+    
+    if (!validateBookingData(bookingData)) {
+        return;
+    }
+    
+    try {
+        showLoading('Processando reserva...');
+        
+        const response = await fetch(`${API_BASE}/flights/book`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                flightOffer: confirmedPricing?.flightOffers[0] || selectedFlightData.rawOffer || selectedFlightData,
+                travelers: bookingData.travelers,
+                contacts: bookingData.contacts
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Salvar dados da reserva
+            sessionStorage.setItem('bookingConfirmation', JSON.stringify(data.data));
+            
+            showNotification('Reserva criada com sucesso!', 'success');
+            
+            // Redirecionar para página de confirmação
+            setTimeout(() => {
+                window.location.href = 'booking-confirmation.html';
+            }, 2000);
+            
+        } else {
+            throw new Error(data.error || 'Erro ao processar reserva');
+        }
+        
+    } catch (error) {
+        console.error('Erro ao processar reserva:', error);
+        showNotification('Erro ao processar reserva: ' + error.message, 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Coletar dados da reserva
+function collectBookingData() {
+    const travelers = [];
+    const passengerForms = document.querySelectorAll('.passenger-form');
+    
+    passengerForms.forEach((form, index) => {
+        const formData = new FormData(form);
+        
+        travelers.push({
+            id: index + 1,
+            dateOfBirth: formData.get('dateOfBirth'),
+            name: {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName')
+            },
+            gender: formData.get('gender').toUpperCase(),
+            contact: {
+                emailAddress: formData.get('email'),
+                phones: [{
+                    deviceType: 'MOBILE',
+                    countryCallingCode: '55',
+                    number: formData.get('phone')?.replace(/\D/g, '')
+                }]
+            },
+            documents: [{
+                documentType: 'PASSPORT',
+                number: formData.get('passportNumber'),
+                expiryDate: formData.get('passportExpiry'),
+                issuanceCountry: formData.get('nationality'),
+                validityCountry: formData.get('nationality'),
+                nationality: formData.get('nationality'),
+                holder: true
+            }]
+        });
+    });
+    
+    const contacts = [{
+        addresseeName: {
+            firstName: travelers[0]?.name.firstName,
+            lastName: travelers[0]?.name.lastName
+        },
+        companyName: 'FlightsMND',
+        purpose: 'STANDARD',
+        phones: travelers[0]?.contact.phones,
+        emailAddress: travelers[0]?.contact.emailAddress
+    }];
+    
+    return { travelers, contacts };
+}
+
+// Validar dados da reserva
+function validateBookingData(bookingData) {
+    if (!bookingData.travelers || bookingData.travelers.length === 0) {
+        showNotification('Dados dos passageiros são obrigatórios', 'error');
+        return false;
+    }
+    
+    for (const traveler of bookingData.travelers) {
+        if (!traveler.name.firstName || !traveler.name.lastName) {
+            showNotification('Nome completo é obrigatório', 'error');
+            return false;
+        }
+        
+        if (!traveler.contact.emailAddress) {
+            showNotification('Email é obrigatório', 'error');
+            return false;
+        }
+        
+        if (!traveler.dateOfBirth) {
+            showNotification('Data de nascimento é obrigatória', 'error');
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Configurar validação do formulário
+function setupFormValidation() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (this.id === 'paymentForm') {
+                processBooking();
+            }
+        });
+    });
+}
+
+// Funções auxiliares
+function formatDuration(duration) {
+    const matches = duration.match(/PT(\d+H)?(\d+M)?/);
+    const hours = matches[1] ? matches[1].replace('H', 'h ') : '';
+    const minutes = matches[2] ? matches[2].replace('M', 'm') : '';
+    return (hours + minutes).trim();
+}
+
+function showLoading(message = 'Carregando...') {
+    const loading = document.getElementById('loading') || createLoadingElement();
+    loading.style.display = 'block';
+    const loadingText = loading.querySelector('.loading-text');
+    if (loadingText) {
+        loadingText.textContent = message;
+    }
+}
+
+function hideLoading() {
+    const loading = document.getElementById('loading');
+    if (loading) {
+        loading.style.display = 'none';
+    }
+}
+
+function createLoadingElement() {
+    const loading = document.createElement('div');
+    loading.id = 'loading';
+    loading.innerHTML = `
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 15px; text-align: center;">
+                <div style="border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 15px;"></div>
+                <p class="loading-text">Carregando...</p>
+            </div>
+        </div>
+        <style>
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    `;
+    document.body.appendChild(loading);
+    return loading;
+}
+
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        z-index: 10000;
+        animation: slideIn 0.3s ease-out;
+        max-width: 300px;
+        ${type === 'success' ? 'background: #28a745;' : 
+          type === 'error' ? 'background: #dc3545;' : 
+          type === 'warning' ? 'background: #ffc107; color: #333;' :
+          'background: #17a2b8;'}
+    `;
+    
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" style="background:none;border:none;color:inherit;font-size:18px;cursor:pointer;margin-left:auto;">×</button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// Adicionar CSS para animações
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .flight-summary {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 2px solid #e9ecef;
+    }
+    
+    .flight-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .flight-route {
+        display: grid;
+        grid-template-columns: 1fr 100px 1fr;
+        gap: 15px;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .departure, .arrival {
+        text-align: center;
+    }
+    
+    .time {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .airport {
+        font-size: 1rem;
+        color: #667eea;
+        font-weight: 600;
+    }
+    
+    .flight-info {
+        text-align: center;
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+    }
+    
+    .duration, .stops {
+        font-size: 0.9rem;
+        color: #666;
+    }
+    
+    .price-summary {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 20px;
+    }
+    
+    .price-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .price-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .price-item:last-child {
+        border-bottom: none;
+    }
+    
+    .price-item.total {
+        font-size: 1.1rem;
+        background: #667eea;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+`;
+document.head.appendChild(style);
+</script>
 </body>
 </html>
