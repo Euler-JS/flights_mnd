@@ -879,6 +879,216 @@
         .floating:nth-child(4) {
             animation-delay: 1.5s;
         }
+
+        /* CSS para autocomplete de aeroportos */
+.airport-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    margin-top: 2px;
+}
+
+.dropdown-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item.highlighted {
+    background: #f8f9fa;
+    border-left: 3px solid #667eea;
+}
+
+.airport-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.iata-code {
+    background: #667eea;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 35px;
+    text-align: center;
+}
+
+/* ====================================
+           CSS PARA DROPDOWN DE AEROPORTOS
+           ==================================== */
+
+        .airport-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            margin-top: 2px;
+            animation: slideDown 0.2s ease-out;
+        }
+
+        .dropdown-header {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: 600;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item.highlighted {
+            background: #f8f9fa;
+            border-left: 3px solid #667eea;
+            padding-left: 13px;
+        }
+
+        .dropdown-item.popular {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+        }
+
+        .dropdown-item.popular:hover,
+        .dropdown-item.popular.highlighted {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, #f8f9fa 100%);
+        }
+
+        .dropdown-item.loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        .dropdown-item.no-results {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            cursor: default;
+        }
+
+        .dropdown-item.no-results:hover {
+            background: white;
+            border-left: none;
+            padding-left: 16px;
+        }
+
+        .airport-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .airport-main {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .iata-code {
+            background: #667eea;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .airport-name {
+            flex: 1;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .popular-icon {
+            color: #ffd700;
+            font-size: 12px;
+            margin-left: auto;
+        }
+
+        .airport-location {
+            font-size: 12px;
+            color: #666;
+            margin-left: 43px; /* Alinhado com o nome do aeroporto */
+        }
+
+        /* Estados do input com aeroporto selecionado */
+        .form-input[data-iata-code] {
+            border-color: #28a745;
+            background-color: rgba(40, 167, 69, 0.05);
+        }
+
+        .form-input[data-iata-code]:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+
+        /* Animação do dropdown */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scrollbar customizada para dropdown */
+        .airport-dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .airport-dropdown::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .airport-dropdown::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .airport-dropdown::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
     </style>
 </head>
 
@@ -943,31 +1153,14 @@
                             <label>Partindo de</label>
                             <div class="input-wrapper">
                                 <i class="fas fa-plane-departure"></i>
-                                <select class="form-select">
-    <option value="">Selecione o aeroporto de origem</option>
-    <option value="GRU">São Paulo (GRU)</option>
-    <option value="GIG">Rio de Janeiro (GIG)</option>
-    <option value="BSB">Brasília (BSB)</option>
-    <option value="SSA">Salvador (SSA)</option>
-    <option value="FOR">Fortaleza (FOR)</option>
-    <option value="REC">Recife (REC)</option>
-</select>
+                                <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de origem" data-airport-type="origin">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Indo para</label>
                             <div class="input-wrapper">
                                 <i class="fas fa-plane-arrival"></i>
-                                <select class="form-select">
-    <option value="">Selecione o destino</option>
-    <option value="GRU">São Paulo (GRU)</option>
-    <option value="GIG">Rio de Janeiro (GIG)</option>
-    <option value="BSB">Brasília (BSB)</option>
-    <option value="SSA">Salvador (SSA)</option>
-    <option value="MIA">Miami (MIA)</option>
-    <option value="JFK">Nova York (JFK)</option>
-    <option value="LHR">Londres (LHR)</option>
-</select>
+                                <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de destino" data-airport-type="destination">
                             </div>
                         </div>
                         <div class="form-group">
@@ -1009,26 +1202,14 @@
                             <label>Partindo de</label>
                             <div class="input-wrapper">
                                 <i class="fas fa-plane-departure"></i>
-                                <select class="form-select">
-                                    <option value="">Selecione o aeroporto de origem</option>
-                                    <option value="gru">São Paulo (GRU)</option>
-                                    <option value="gig">Rio de Janeiro (GIG)</option>
-                                    <option value="bsb">Brasília (BSB)</option>
-                                    <option value="sal">Salvador (SSA)</option>
-                                </select>
+                                <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de origem" data-airport-type="origin">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Indo para</label>
                             <div class="input-wrapper">
                                 <i class="fas fa-plane-arrival"></i>
-                                <select class="form-select">
-                                    <option value="">Selecione o destino</option>
-                                    <option value="nyc">Nova York</option>
-                                    <option value="lhr">Londres</option>
-                                    <option value="cdg">Paris</option>
-                                    <option value="nrt">Tóquio</option>
-                                </select>
+                                <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de destino" data-airport-type="destination">
                             </div>
                         </div>
                         <div class="form-group">
@@ -1064,22 +1245,14 @@
                                 <label>Partindo de</label>
                                 <div class="input-wrapper">
                                     <i class="fas fa-plane-departure"></i>
-                                    <select class="form-select">
-                                        <option value="">Selecione origem</option>
-                                        <option value="gru">São Paulo (GRU)</option>
-                                        <option value="gig">Rio de Janeiro (GIG)</option>
-                                    </select>
+                                    <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de origem" data-airport-type="origin">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Indo para</label>
                                 <div class="input-wrapper">
                                     <i class="fas fa-plane-arrival"></i>
-                                    <select class="form-select">
-                                        <option value="">Selecione destino</option>
-                                        <option value="nyc">Nova York</option>
-                                        <option value="lhr">Londres</option>
-                                    </select>
+                                    <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de destino" data-airport-type="destination">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1097,22 +1270,14 @@
                                 <label>Partindo de</label>
                                 <div class="input-wrapper">
                                     <i class="fas fa-plane-departure"></i>
-                                    <select class="form-select">
-                                        <option value="">Selecione origem</option>
-                                        <option value="nyc">Nova York</option>
-                                        <option value="lhr">Londres</option>
-                                    </select>
+                                    <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de origem" data-airport-type="origin">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Indo para</label>
                                 <div class="input-wrapper">
                                     <i class="fas fa-plane-arrival"></i>
-                                    <select class="form-select">
-                                        <option value="">Selecione destino</option>
-                                        <option value="cdg">Paris</option>
-                                        <option value="nrt">Tóquio</option>
-                                    </select>
+                                    <input type="text" class="form-input" placeholder="Digite cidade ou aeroporto de destino" data-airport-type="destination">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1378,8 +1543,8 @@
             }
 
             // Extrair códigos IATA dos campos (formato: "GRU - Aeroporto de Guarulhos")
-            const originCode = extractIATACode(formData.origin);
-            const destinationCode = extractIATACode(formData.destination);
+            const originCode = formData.origin; // Já vem limpo do dataset.iataCode
+            const destinationCode = formData.destination;
 
             
 
@@ -1584,95 +1749,31 @@
 function collectSearchData(activeTab) {
     const data = {};
     
-    console.log('Coletando dados da aba:', activeTab.id);
+    // Buscar campos por data attributes - SIMPLES e DIRETO
+    const originInput = activeTab.querySelector('[data-airport-type="origin"]');
+    const destinationInput = activeTab.querySelector('[data-airport-type="destination"]');
     
-    // Buscar selects de origem e destino na aba ativa
-    const formGroups = activeTab.querySelectorAll('.form-group');
+    // Extrair códigos IATA dos inputs (salvos pelo AirportSelector)
+    data.origin = originInput?.dataset.iataCode || '';
+    data.destination = destinationInput?.dataset.iataCode || '';
     
-    formGroups.forEach(group => {
-        const label = group.querySelector('label')?.textContent.toLowerCase();
-        const select = group.querySelector('.form-select');
-        const input = group.querySelector('input');
-        
-        if (label && label.includes('partindo')) {
-            // Campo de origem
-            data.origin = select ? select.value : (input ? input.value : '');
-        } else if (label && label.includes('indo')) {
-            // Campo de destino  
-            data.destination = select ? select.value : (input ? input.value : '');
-        } else if (label && label.includes('partida')) {
-            // Data de partida
-            data.departureDate = input ? input.value : '';
-        } else if (label && label.includes('volta')) {
-            // Data de volta
-            data.returnDate = input ? input.value : '';
-        } else if (label && label.includes('adultos')) {
-            // Adultos
-            data.adults = select ? select.value : '1';
-        } else if (label && label.includes('crianças')) {
-            // Crianças
-            data.children = select ? select.value : '0';
-        } else if (label && label.includes('classe')) {
-            // Classe
-            data.travelClass = select ? select.value : 'ECONOMY';
-        }
-    });
+    // Buscar datas diretamente
+    const dateInputs = activeTab.querySelectorAll('input[type="date"]');
+    data.departureDate = dateInputs[0]?.value || '';
+    data.returnDate = dateInputs[1]?.value || '';
     
-    // Buscar campos de data diretamente se não encontrados
-    if (!data.departureDate) {
-        const dateInputs = activeTab.querySelectorAll('input[type="date"]');
-        if (dateInputs.length > 0) data.departureDate = dateInputs[0].value;
-        if (dateInputs.length > 1) data.returnDate = dateInputs[1].value;
-    }
+    // Buscar passageiros (manter select existente)
+    const passengersSelect = activeTab.querySelector('select');
+    data.adults = passengersSelect?.value || '1';
     
-    // Valores padrão se não encontrados
-    data.adults = data.adults || '1';
-    data.children = data.children || '0';
-    data.infants = '0'; // Assumir 0 bebês por padrão
-    data.travelClass = data.travelClass || 'ECONOMY';
+    // Valores padrão
+    data.children = '0';
+    data.infants = '0';
+    data.travelClass = 'ECONOMY';
     
-    console.log('Dados coletados:', data);
     return data;
 }
-
       // Função para extrair código IATA - VERSÃO CORRIGIDA
-function extractIATACode(text) {
-    if (!text) return null;
-    
-    console.log('Extraindo IATA de:', text);
-    
-    // Se já é um código IATA (3 letras)
-    if (/^[A-Z]{3}$/i.test(text.trim())) {
-        return text.trim().toUpperCase();
-    }
-    
-    // Extrair do formato "gru" -> "GRU"
-    if (/^[a-z]{3}$/i.test(text.trim())) {
-        return text.trim().toUpperCase();
-    }
-    
-    // Extrair do formato "GRU - Nome do aeroporto" 
-    const match = text.match(/^([A-Z]{3})\s*-/i);
-    if (match) {
-        return match[1].toUpperCase();
-    }
-    
-    // Se é um dos valores do seu select, converter
-    const airportCodes = {
-        'gru': 'GRU',
-        'gig': 'GIG', 
-        'bsb': 'BSB',
-        'sal': 'SSA'
-    };
-    
-    const lowerText = text.toLowerCase();
-    if (airportCodes[lowerText]) {
-        return airportCodes[lowerText];
-    }
-    
-    console.log('Não foi possível extrair IATA de:', text);
-    return null;
-}
 
         function showNotification(message, type = 'info') {
             // Remover notificação anterior
@@ -1720,150 +1821,377 @@ function extractIATACode(text) {
 
     <script>
         // ====================================
-        // INTEGRAÇÃO AMADEUS - AUTOCOMPLETE
-        // ====================================
+// INTEGRAÇÃO AMADEUS - AUTOCOMPLETE
+// ====================================
 
-        const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'http://localhost:3000/api';
 
-        // Função para buscar aeroportos
-        async function searchAirports(keyword) {
-            if (keyword.length < 3) return [];
+// Base de dados local para aeroportos populares (carregamento rápido)
+const popularAirports = [
+    // Brasil - Principais
+    { iataCode: 'GRU', name: 'Aeroporto Internacional de São Paulo', city: 'São Paulo', country: 'Brazil', popular: true },
+    { iataCode: 'GIG', name: 'Aeroporto Internacional Tom Jobim', city: 'Rio de Janeiro', country: 'Brazil', popular: true },
+    { iataCode: 'BSB', name: 'Aeroporto Internacional de Brasília', city: 'Brasília', country: 'Brazil', popular: true },
+    { iataCode: 'SSA', name: 'Aeroporto Deputado Luís Eduardo Magalhães', city: 'Salvador', country: 'Brazil', popular: true },
+    { iataCode: 'FOR', name: 'Aeroporto Internacional Pinto Martins', city: 'Fortaleza', country: 'Brazil', popular: true },
+    { iataCode: 'REC', name: 'Aeroporto Internacional dos Guararapes', city: 'Recife', country: 'Brazil', popular: true },
+    
+    // Internacionais - Populares  
+    { iataCode: 'JFK', name: 'John F. Kennedy International Airport', city: 'New York', country: 'USA', popular: true },
+    { iataCode: 'LHR', name: 'London Heathrow Airport', city: 'London', country: 'UK', popular: true },
+    { iataCode: 'CDG', name: 'Charles de Gaulle Airport', city: 'Paris', country: 'France', popular: true },
+    { iataCode: 'MIA', name: 'Miami International Airport', city: 'Miami', country: 'USA', popular: true },
+    { iataCode: 'LAX', name: 'Los Angeles International Airport', city: 'Los Angeles', country: 'USA', popular: true }
+];
 
-            try {
-                const response = await fetch(`${API_BASE}/locations/search?keyword=${encodeURIComponent(keyword)}`);
-                const data = await response.json();
-                return data.success ? data.data : [];
-            } catch (error) {
-                console.error('Erro ao buscar aeroportos:', error);
-                return [];
-            }
-        }
+// Cache para resultados da API
+const airportCache = new Map();
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minutos
 
-        // Configurar autocomplete nos selects
-        function setupAirportAutocomplete() {
-            const originSelect = document.querySelector('select.form-select[name="origin"]');
-            const destinationSelect = document.querySelector('select.form-select[name="destination"]');
-
-            // Converter selects em inputs com autocomplete
-            [originSelect, destinationSelect].forEach(select => {
-                if (!select) return;
-
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.className = select.className;
-                input.placeholder = select === originSelect ?
-                    'Digite a cidade ou aeroporto de origem' :
-                    'Digite a cidade ou aeroporto de destino';
-
-                // Substituir select por input
-                select.parentNode.insertBefore(input, select);
-                select.style.display = 'none';
-
-                // Adicionar autocomplete
-                setupInputAutocomplete(input);
-            });
-        }
-
-        // Configurar autocomplete em um input
-        function setupInputAutocomplete(input) {
-            let timeoutId;
-
-            input.addEventListener('input', function () {
-                clearTimeout(timeoutId);
-                const query = this.value.trim();
-
-                if (query.length < 3) {
-                    removeSuggestions(this);
-                    return;
+class AirportSelector {
+    constructor(inputElement, options = {}) {
+        this.input = inputElement;
+        this.options = {
+            minChars: 2,
+            maxResults: 8,
+            showPopular: true,
+            placeholder: 'Digite a cidade ou aeroporto...',
+            ...options
+        };
+        
+        this.isOpen = false;
+        this.selectedIndex = -1;
+        this.currentResults = [];
+        this.debounceTimer = null;
+        
+        this.init();
+    }
+    
+    init() {
+        this.createDropdown();
+        this.setupEventListeners();
+        this.input.placeholder = this.options.placeholder;
+        
+        // Mostrar aeroportos populares ao focar
+        if (this.options.showPopular) {
+            this.input.addEventListener('focus', () => {
+                if (!this.input.value.trim()) {
+                    this.showPopularAirports();
                 }
-
-                timeoutId = setTimeout(async () => {
-                    const airports = await searchAirports(query);
-                    showSuggestions(this, airports);
-                }, 500);
-            });
-
-            // Fechar sugestões ao perder foco
-            input.addEventListener('blur', function () {
-                setTimeout(() => removeSuggestions(this), 200);
             });
         }
-
-        // Mostrar sugestões de aeroportos
-        function showSuggestions(input, airports) {
-            removeSuggestions(input);
-
-            if (airports.length === 0) return;
-
-            const suggestions = document.createElement('div');
-            suggestions.className = 'airport-suggestions';
-            suggestions.style.cssText = `
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        z-index: 1000;
-        max-height: 300px;
-        overflow-y: auto;
-    `;
-
-            airports.slice(0, 8).forEach(airport => {
-                const suggestion = document.createElement('div');
-                suggestion.style.cssText = `
-            padding: 12px 16px;
-            cursor: pointer;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background-color 0.2s;
+    }
+    
+    createDropdown() {
+        this.dropdown = document.createElement('div');
+        this.dropdown.className = 'airport-dropdown';
+        this.dropdown.style.cssText = `
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            margin-top: 2px;
         `;
-                suggestion.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                <span style="font-weight: bold; color: #667eea; font-size: 0.9rem;">${airport.iataCode}</span>
-                <span style="font-size: 0.9rem; color: #333;">${airport.name}</span>
-            </div>
-            <div style="font-size: 0.8rem; color: #666;">${airport.city}, ${airport.country}</div>
-        `;
-
-                suggestion.addEventListener('mouseenter', () => {
-                    suggestion.style.backgroundColor = '#f8f9fa';
-                });
-
-                suggestion.addEventListener('mouseleave', () => {
-                    suggestion.style.backgroundColor = 'white';
-                });
-
-                suggestion.addEventListener('click', () => {
-                    input.value = `${airport.iataCode} - ${airport.name}`;
-                    input.dataset.iataCode = airport.iataCode;
-                    removeSuggestions(input);
-                });
-
-                suggestions.appendChild(suggestion);
-            });
-
-            // Posicionar relative no container
-            if (input.parentNode.style.position !== 'relative') {
-                input.parentNode.style.position = 'relative';
-            }
-
-            input.parentNode.appendChild(suggestions);
+        
+        // Garantir que o container pai tenha position relative
+        const container = this.input.parentElement;
+        if (getComputedStyle(container).position === 'static') {
+            container.style.position = 'relative';
         }
-
-        // Remover sugestões
-        function removeSuggestions(input) {
-            const suggestions = input.parentNode.querySelector('.airport-suggestions');
-            if (suggestions) {
-                suggestions.remove();
+        
+        container.appendChild(this.dropdown);
+    }
+    
+    setupEventListeners() {
+        // Input events
+        this.input.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            
+            if (query.length >= this.options.minChars) {
+                this.debounceSearch(query);
+            } else if (query.length === 0 && this.options.showPopular) {
+                this.showPopularAirports();
+            } else {
+                this.hideDropdown();
             }
-        }
-
-        // Inicializar quando a página carregar
-        document.addEventListener('DOMContentLoaded', function () {
-            setupAirportAutocomplete();
         });
+        
+        // Keyboard navigation
+        this.input.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    this.moveSelection(1);
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    this.moveSelection(-1);
+                    break;
+                case 'Enter':
+                    e.preventDefault();
+                    if (this.selectedIndex >= 0) {
+                        this.selectAirport(this.currentResults[this.selectedIndex]);
+                    }
+                    break;
+                case 'Escape':
+                    this.hideDropdown();
+                    break;
+            }
+        });
+        
+        // Click outside to close
+        document.addEventListener('click', (e) => {
+            if (!this.input.contains(e.target) && !this.dropdown.contains(e.target)) {
+                this.hideDropdown();
+            }
+        });
+    }
+    
+    debounceSearch(query) {
+        clearTimeout(this.debounceTimer);
+        this.debounceTimer = setTimeout(() => {
+            this.searchAirports(query);
+        }, 300);
+    }
+    
+    async searchAirports(query) {
+        try {
+            // Primeiro, buscar nos aeroportos populares localmente
+            const localResults = this.searchLocalAirports(query);
+            
+            // Se encontrou resultados locais suficientes, mostrar eles
+            if (localResults.length >= 3) {
+                this.showResults(localResults);
+                return;
+            }
+            
+            // Verificar cache
+            const cacheKey = query.toLowerCase();
+            const cached = airportCache.get(cacheKey);
+            
+            if (cached && (Date.now() - cached.timestamp) < CACHE_DURATION) {
+                const combinedResults = this.combineResults(localResults, cached.data);
+                this.showResults(combinedResults);
+                return;
+            }
+            
+            // Buscar na API
+            this.showLoading();
+            const apiResults = await this.searchAPI(query);
+            
+            // Salvar no cache
+            airportCache.set(cacheKey, {
+                data: apiResults,
+                timestamp: Date.now()
+            });
+            
+            // Combinar resultados locais e da API
+            const combinedResults = this.combineResults(localResults, apiResults);
+            this.showResults(combinedResults);
+            
+        } catch (error) {
+            console.error('Erro na busca de aeroportos:', error);
+            // Em caso de erro da API, mostrar apenas resultados locais
+            const localResults = this.searchLocalAirports(query);
+            this.showResults(localResults);
+        }
+    }
+    
+    searchLocalAirports(query) {
+        const searchTerm = query.toLowerCase();
+        return popularAirports
+            .filter(airport => 
+                airport.iataCode.toLowerCase().includes(searchTerm) ||
+                airport.name.toLowerCase().includes(searchTerm) ||
+                airport.city.toLowerCase().includes(searchTerm)
+            )
+            .slice(0, this.options.maxResults);
+    }
+    
+    async searchAPI(query) {
+        const response = await fetch(`${API_BASE}/locations/search?keyword=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        
+        if (!data.success) {
+            throw new Error(data.error || 'Erro na busca');
+        }
+        
+        return data.data || [];
+    }
+    
+    combineResults(localResults, apiResults) {
+        const seen = new Set();
+        const combined = [];
+        
+        // Adicionar resultados locais primeiro (prioridade)
+        localResults.forEach(airport => {
+            if (!seen.has(airport.iataCode)) {
+                seen.add(airport.iataCode);
+                combined.push({ ...airport, source: 'local' });
+            }
+        });
+        
+        // Adicionar resultados da API
+        apiResults.forEach(airport => {
+            if (!seen.has(airport.iataCode) && combined.length < this.options.maxResults) {
+                seen.add(airport.iataCode);
+                combined.push({ ...airport, source: 'api' });
+            }
+        });
+        
+        return combined.slice(0, this.options.maxResults);
+    }
+    
+    showPopularAirports() {
+        const popular = popularAirports
+            .filter(airport => airport.popular)
+            .slice(0, 6);
+        this.showResults(popular, 'Aeroportos Populares');
+    }
+    
+    showResults(results, title = null) {
+        this.currentResults = results;
+        this.selectedIndex = -1;
+        
+        let html = '';
+        
+        if (title) {
+            html += `<div class="dropdown-header">${title}</div>`;
+        }
+        
+        if (results.length === 0) {
+            html += `<div class="dropdown-item no-results">Nenhum aeroporto encontrado</div>`;
+        } else {
+            results.forEach((airport, index) => {
+                const isPopular = airport.popular || airport.source === 'local';
+                html += `
+                    <div class="dropdown-item ${isPopular ? 'popular' : ''}" data-index="${index}">
+                        <div class="airport-info">
+                            <div class="airport-main">
+                                <span class="iata-code">${airport.iataCode}</span>
+                                <span class="airport-name">${airport.name}</span>
+                                ${isPopular ? '<i class="fas fa-star popular-icon"></i>' : ''}
+                            </div>
+                            <div class="airport-location">${airport.city}, ${airport.country}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        this.dropdown.innerHTML = html;
+        this.showDropdown();
+        this.setupItemListeners();
+    }
+    
+    showLoading() {
+        this.dropdown.innerHTML = `
+            <div class="dropdown-item loading">
+                <i class="fas fa-spinner fa-spin"></i> Buscando aeroportos...
+            </div>
+        `;
+        this.showDropdown();
+    }
+    
+    setupItemListeners() {
+        const items = this.dropdown.querySelectorAll('.dropdown-item[data-index]');
+        items.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const index = parseInt(item.dataset.index);
+                this.selectAirport(this.currentResults[index]);
+            });
+            
+            item.addEventListener('mouseenter', () => {
+                this.clearSelection();
+                this.selectedIndex = parseInt(item.dataset.index);
+                item.classList.add('highlighted');
+            });
+        });
+    }
+    
+    moveSelection(direction) {
+        if (!this.isOpen || this.currentResults.length === 0) return;
+        
+        this.clearSelection();
+        
+        this.selectedIndex += direction;
+        
+        if (this.selectedIndex < 0) {
+            this.selectedIndex = this.currentResults.length - 1;
+        } else if (this.selectedIndex >= this.currentResults.length) {
+            this.selectedIndex = 0;
+        }
+        
+        const items = this.dropdown.querySelectorAll('.dropdown-item[data-index]');
+        if (items[this.selectedIndex]) {
+            items[this.selectedIndex].classList.add('highlighted');
+            items[this.selectedIndex].scrollIntoView({ block: 'nearest' });
+        }
+    }
+    
+    clearSelection() {
+        this.dropdown.querySelectorAll('.dropdown-item').forEach(item => {
+            item.classList.remove('highlighted');
+        });
+    }
+    
+    selectAirport(airport) {
+        this.input.value = `${airport.iataCode} - ${airport.name}`;
+        this.input.dataset.iataCode = airport.iataCode;
+        this.input.dataset.airportData = JSON.stringify(airport);
+        
+        // Trigger change event
+        this.input.dispatchEvent(new Event('change', { bubbles: true }));
+        
+        this.hideDropdown();
+    }
+    
+    showDropdown() {
+        this.dropdown.style.display = 'block';
+        this.isOpen = true;
+    }
+    
+    hideDropdown() {
+        this.dropdown.style.display = 'none';
+        this.isOpen = false;
+        this.selectedIndex = -1;
+    }
+}
+
+// Função para inicializar todos os seletores de aeroporto
+function initializeAirportSelectors() {
+    // Buscar todos os inputs que precisam de seleção de aeroporto
+    const originInputs = document.querySelectorAll('[data-airport-type="origin"]');
+    const destinationInputs = document.querySelectorAll('[data-airport-type="destination"]');
+    
+    originInputs.forEach(input => {
+        new AirportSelector(input, {
+            placeholder: 'Digite a cidade ou aeroporto de origem...',
+            showPopular: true
+        });
+    });
+    
+    destinationInputs.forEach(input => {
+        new AirportSelector(input, {
+            placeholder: 'Digite a cidade ou aeroporto de destino...',
+            showPopular: true
+        });
+    });
+}
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', function () {
+    initializeAirportSelectors();
+});
     </script>
     <!--  -->
 </body>
