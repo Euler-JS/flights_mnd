@@ -1139,7 +1139,7 @@
                                         <label class="required">Telefone</label>
                                         <div class="input-wrapper">
                                             <i class="fas fa-phone"></i>
-                                            <input type="tel" class="form-input" name="phone" placeholder="(11) 99999-9999" required>
+                                            <input type="tel" class="form-input" name="phone" placeholder="" required>
                                         </div>
                                         <div class="error-message">Telefone é obrigatório</div>
                                     </div>
@@ -1792,22 +1792,30 @@
             return isValid;
         }
 
-        function updateFieldValidation(field, isValid, errorMessage) {
-            const errorDiv = field.closest('.form-group').querySelector('.error-message');
-            
-            if (isValid) {
-                field.classList.remove('error');
-                if (errorDiv) {
-                    errorDiv.style.display = 'none';
-                }
-            } else {
-                field.classList.add('error');
-                if (errorDiv) {
-                    errorDiv.textContent = errorMessage;
-                    errorDiv.style.display = 'block';
-                }
-            }
+       function updateFieldValidation(field, isValid, errorMessage) {
+    const formGroup = field.closest('.form-group');
+    
+    if (!formGroup) {
+        console.warn(`.form-group não encontrado para:`, field);
+        return;
+    }
+
+    const errorDiv = formGroup.querySelector('.error-message');
+
+    if (isValid) {
+        field.classList.remove('error');
+        if (errorDiv) {
+            errorDiv.style.display = 'none';
         }
+    } else {
+        field.classList.add('error');
+        if (errorDiv) {
+            errorDiv.textContent = errorMessage;
+            errorDiv.style.display = 'block';
+        }
+    }
+}
+
 
         // ====================================
         // FUNÇÕES DE VALIDAÇÃO
@@ -1899,6 +1907,8 @@
             }
 
             const bookingData = collectBookingData();
+            console.log('Dados da reserva coletados:', bookingData);
+
             
             if (!bookingData) {
                 showNotification('Erro ao coletar dados do formulário', 'error');
@@ -2028,6 +2038,20 @@
         async function processBooking(bookingData) {
             try {
                 showLoading('Processando reserva...', 'Isso pode levar alguns minutos');
+
+                /*Para teste*/
+
+                    
+                    hideLoading();
+                    showSuccessMessage();
+                    
+                    // Redirecionar após sucesso
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 3000);
+
+                    /*Apenas para testes*/
+                    return
                 
                 // Primeiro, confirmar o preço do voo
                 await confirmFlightPrice();
